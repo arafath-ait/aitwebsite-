@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIT - Official Portal</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 40%, #415a77 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 15px;
+        }
+
+        .main-card {
+            background: rgba(13, 27, 42, 0.95);
+            border: 2px solid #778da9;
+            border-radius: 20px;
+            padding: 25px;
+            width: 100%;
+            max-width: 600px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+        }
+
+        .top-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .brand {
+            font-size: 28px;
+            font-weight: 900;
+            background: linear-gradient(to right, #ff416c, #ff4b2b, #f9d423);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .lang-btn {
+            background: #e0e1dd;
+            color: #0d1b2a;
+            border: none;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        .box-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 18px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+
+        .box-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #f9d423;
+            margin-bottom: 12px;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 10px;
+            background: #1b263b;
+            border: 1px solid #778da9;
+            border-radius: 8px;
+            color: white;
+            font-size: 14px;
+        }
+
+        .btn-action {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(90deg, #11998e, #38ef7d);
+            color: #000;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        .toggle-text {
+            font-size: 12px;
+            color: #38ef7d;
+            cursor: pointer;
+            text-decoration: underline;
+            margin-top: 8px;
+            display: inline-block;
+        }
+
+        .success-msg {
+            display: none;
+            margin-top: 10px;
+            padding: 12px;
+            background: #11998e;
+            color: white;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .scroll-area {
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .link-item {
+            background: #1b263b;
+            padding: 10px 15px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            border-left: 4px solid #ff416c;
+        }
+
+        .link-item a {
+            color: #f9d423;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .admin-link {
+            color: #778da9;
+            font-size: 12px;
+            cursor: pointer;
+            text-decoration: underline;
+            background: none;
+            border: none;
+        }
+
+        .admin-panel {
+            display: none;
+            margin-top: 15px;
+            background: #0d1b2a;
+            padding: 15px;
+            border-radius: 12px;
+            border: 1px solid #f9d423;
+            text-align: left;
+        }
+
+        .user-data-row {
+            background: #1b263b;
+            padding: 8px 12px;
+            border-radius: 6px;
+            margin-bottom: 6px;
+            font-size: 13px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main-card">
+        
+        <div class="top-nav">
+            <div class="brand">AIT</div>
+            <button class="lang-btn" onclick="toggleLang()" id="langBtn">English</button>
+        </div>
+
+        <p id="subTitle" style="color: #e0e1dd; margin-bottom: 20px; font-size: 14px;">അറഫാത്ത് ഇൻഫർമേഷൻ ടെക്നോളജി • ഒഫീഷ്യൽ പോർട്ടൽ</p>
+
+        <!-- മെമ്പർ സെക്ഷൻ (രജിസ്ട്രേഷൻ & ലോഗിൻ) -->
+        <div class="box-card">
+            <!-- 1. ആദ്യമായി വരുന്നവർക്ക് സബ്സ്ക്രൈബ്/രജിസ്റ്റർ ചെയ്യാൻ -->
+            <div id="regBox">
+                <div class="box-title" id="lblRegister">👤 New Member Registration</div>
+                <input type="text" id="regName" placeholder="നിങ്ങളുടെ പേര് (Enter Name)">
+                <input type="password" id="regPass" placeholder="ഒരു പാസ്‌വേഡ് ഉണ്ടാക്കുക (Create Password)">
+                <button class="btn-action" onclick="registerUser()" id="btnReg">Register & Get AIT Code</button>
+                <span class="toggle-text" onclick="showLoginOnly()">മുമ്പ് രജിസ്റ്റർ ചെയ്തതാണോ? Login ചെയ്യുക</span>
+            </div>
+
+            <!-- 2. രണ്ടാമതും വരുന്നവർക്ക് ലോഗിൻ ചെയ്യാൻ -->
+            <div id="loginBox" style="display:none;">
+                <div class="box-title" id="lblLogin">🔑 Existing Member Login</div>
+                <input type="text" id="loginCode" placeholder="AIT Code (e.g., AIT-1234)">
+                <input type="password" id="loginPass" placeholder="നിങ്ങളുടെ പാസ്‌വേഡ് (Enter Password)">
+                <button class="btn-action" onclick="loginUser()" id="btnLogin">Login</button>
+                <span class="toggle-text" onclick="showRegOnly()">പുതിയ ആളാണോ? Register ചെയ്യുക</span>
+            </div>
+
+            <div id="userMsg" class="success-msg"></div>
+        </div>
+
+        <!-- പബ്ലിക് പ്ലാനുകളും ലിങ്കുകളും -->
+        <div class="box-card">
+            <div class="box-title" id="lblResources">📌 AIT Plans & Resources</div>
+            <div class="scroll-area" id="publicContent">
+                <div class="link-item">
+                    <div style="font-size: 12px; color: #aaa;">Official Resource</div>
+                    <a href="https://youtube.com" target="_blank">AIT Main Channel</a>
+                </div>
+                <div class="link-item" style="border-left-color: #f9d423;">
+                    <div style="font-size: 12px; color: #aaa;">Future Plan</div>
+                    <div style="color: white; font-size: 14px;">AIT പോർട്ടൽ കൂടുതൽ ഫീച്ചറുകളോടെ വികസിപ്പിക്കുന്നു.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- അഡ്മിൻ കൺട്രോൾ സെന്റർ -->
+        <div class="footer">
+            <button class="admin-link" onclick="toggleAdmin()">• AIT Admin Control Center •</button>
+            
+            <div id="adminLogin" style="display:none; margin-top:10px;">
+                <input type="password" id="adminPass" placeholder="Enter Admin Password">
+                <button class="btn-action" style="background:#ff416c; color:white;" onclick="checkAdmin()">Open Control Center</button>
+            </div>
+
+            <!-- അഡ്മിൻ പാനൽ (നിനക്ക് ആളുകളുടെ പേരും പാസ്‌വേഡും കാണാനുള്ളത്) -->
+            <div id="adminPanel" class="admin-panel">
+                <div class="box-title" style="color:#ff416c;">⚙️ AIT Control Center</div>
+                
+                <p style="font-size:13px; color:#f9d423; margin-bottom:8px;">👥 Registered Members Credentials:</p>
+                <div id="registeredUsersList" style="max-height:150px; overflow-y:auto; margin-bottom:15px;">
+                    <i>അംഗങ്ങൾ രജിസ്റ്റർ ചെയ്യുമ്പോൾ അവരുടെ വിവരങ്ങൾ ഇവിടെ കാണാം...</i>
+                </div>
+
+                <p style="font-size:13px; color:#f9d423; margin-bottom:5px;">➕ Add New Public Resource:</p>
+                <input type="text" id="newTitle" placeholder="Title">
+                <input type="text" id="newLink" placeholder="Link / Plan Note">
+                <button class="btn-action" onclick="addPublicContent()">Add to Website</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        const ADMIN_PASS = "AIT2012";
+        let isMalayalam = true;
+        
+        // ബ്രൗസറിൽ ഡാറ്റ സേവ് ചെയ്തു വെക്കാൻ LocalStorage ഉപയോഗിക്കുന്നു
+        let usersData = JSON.parse(localStorage.getItem('ait_users')) || [];
+
+        function toggleLang() {
+            var btn = document.getElementById("langBtn");
+            var subTitle = document.getElementById("subTitle");
+            var lblRegister = document.getElementById("lblRegister");
+            var btnReg = document.getElementById("btnReg");
+            var lblResources = document.getElementById("lblResources");
+
+            if(isMalayalam) {
+                btn.innerText = "മലയാളം";
+                subTitle.innerText = "Arafath Information Technology • Official Portal";
+                lblRegister.innerText = "👤 New Member Registration";
+                btnReg.innerText = "Register & Get AIT Code";
+                lblResources.innerText = "📌 AIT Plans & Resources";
+                isMalayalam = false;
+            } else {
+                btn.innerText = "English";
+                subTitle.innerText = "അറഫാത്ത് ഇൻഫർമേഷൻ ടെക്നോളജി • ഒഫീഷ്യൽ പോർട്ടൽ";
+                lblRegister.innerText = "👤 പുതിയ മെമ്പർ രജിസ്ട്രേഷൻ";
+                btnReg.innerText = "രജിസ്റ്റർ ചെയ്ത് കോഡ് നേടുക";
+                lblResources.innerText = "📌 AIT പ്ലാനുകളും ലിങ്കുകളും";
+                isMalayalam = true;
+            }
+        }
+
+        function showLoginOnly() {
+            document.getElementById("regBox").style.display = "none";
+            document.getElementById("loginBox").style.display = "block";
+            document.getElementById("userMsg").style.display = "none";
+        }
+
+        function showRegOnly() {
+            document.getElementById("loginBox").style.display = "none";
+            document.getElementById("regBox").style.display = "block";
+            document.getElementById("userMsg").style.display = "none";
+        }
+
+        function registerUser() {
+            var name = document.getElementById("regName").value;
+            var pass = document.getElementById("regPass").value;
+            var msg = document.getElementById("userMsg");
+
+            if(name.trim() === "" || pass.trim() === "") {
+                alert("ദയവായി പേരും പാസ്‌വേഡും നൽകുക!");
+                return;
+            }
+
+            var randomCode = "AIT-" + Math.floor(1000 + Math.random() * 9000);
+            
+            // യൂസർ വിവരങ്ങൾ സിസ്റ്റത്തിൽ സൂക്ഷിക്കുന്നു
+            usersData.push({ name: name, pass: pass, code: randomCode });
+            localStorage.setItem('ait_users', JSON.stringify(usersData));
+
+            msg.style.display = "block";
+            msg.innerHTML = `🎉 Successfully Registered!<br>Your Unique AIT Code: <span style="color:#f9d423;">${randomCode}</span><br><small>(അടുത്ത തവണ കയറാൻ ഈ കോഡും പാസ്‌വേഡും ഉപയോഗിക്കുക!)</small>`;
+
+            document.getElementById("regName").value = "";
+            document.getElementById("regPass").value = "";
+        }
+
+        function loginUser() {
+            var code = document.getElementById("loginCode").value;
+            var pass = document.getElementById("loginPass").value;
+            var msg = document.getElementById("userMsg");
+
+            let foundUser = usersData.find(u => u.code === code.trim() && u.pass === pass.trim());
+
+            if(foundUser) {
+                msg.style.display = "block";
+                msg.innerHTML = `✅ Welcome Back, <span style="color:#f9d423;">${foundUser.name}</span>!<br>Login Successful.`;
+            } else {
+                alert("❌ തെറ്റായ AIT Code അല്ലെങ്കിൽ Password!");
+            }
+        }
+
+        function toggleAdmin() {
+            var login = document.getElementById("adminLogin");
+            login.style.display = login.style.display === "block" ? "none" : "block";
+        }
+
+        function checkAdmin() {
+            var pass = document.getElementById("adminPass").value;
+            if(pass === ADMIN_PASS) {
+                document.getElementById("adminLogin").style.display = "none";
+                document.getElementById("adminPanel").style.display = "block";
+                renderAdminUserData();
+            } else {
+                alert("❌ Wrong Admin Password!");
+            }
+        }
+
+        function renderAdminUserData() {
+            var list = document.getElementById("registeredUsersList");
+            list.innerHTML = "";
+
+            if(usersData.length === 0) {
+                list.innerHTML = "<i>രജിസ്റ്റർ ചെയ്ത വിവരങ്ങൾ ഒന്നും ഇല്ല.</i>";
+                return;
+            }
+
+            usersData.forEach(function(u) {
+                list.innerHTML += `
+                    <div class="user-data-row">
+                        👤 <b>Name:</b> ${u.name} | 🔑 <b>Pass:</b> <span style="color:#ff416c;">${u.pass}</span> | 🆔 <b>Code:</b> <span style="color:#38ef7d;">${u.code}</span>
+                    </div>
+                `;
+            });
+        }
+
+        function addPublicContent() {
+            var title = document.getElementById("newTitle").value;
+            var link = document.getElementById("newLink").value;
+            var area = document.getElementById("publicContent");
+
+            if(title && link) {
+                var isUrl = link.startsWith("http://") || link.startsWith("https://");
+                var contentHTML = `
+                    <div class="link-item">
+                        <div style="font-size: 12px; color: #aaa;">${title}</div>
+                        ${isUrl ? `<a href="${link}" target="_blank">${link}</a>` : `<div style="color:white;">${link}</div>`}
+                    </div>
+                `;
+                area.innerHTML = contentHTML + area.innerHTML;
+                document.getElementById("newTitle").value = "";
+                document.getElementById("newLink").value = "";
+                alert("അപ്‌ഡേറ്റ് ചെയ്തു!");
+            }
+        }
+    </script>
+
+</body>
+</html>

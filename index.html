@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+    <meta charset="UTF-8">
+    <title>AIT - Arafath Intelligent Thought</title>
+    <style>
+        :root {
+            --bg-color: #121212;
+            --card-bg: #1e1e1e;
+            --text-color: #ffffff;
+            --accent-color: #00d2ff;
+        }
+
+        .light-mode {
+            --bg-color: #f4f4f9;
+            --card-bg: #ffffff;
+            --text-color: #222222;
+            --accent-color: #0078d4;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            text-align: center;
+            padding: 20px;
+            transition: 0.3s;
+        }
+
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 500px;
+            margin: 0 auto 20px auto;
+        }
+
+        .secret-btn {
+            background: none;
+            border: 1px solid var(--accent-color);
+            color: var(--accent-color);
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            padding: 25px;
+            border-radius: 15px;
+            max-width: 450px;
+            margin: auto;
+            box-shadow: 0px 0px 15px rgba(0, 210, 255, 0.2);
+        }
+
+        input, textarea {
+            padding: 10px;
+            width: 85%;
+            margin: 8px 0;
+            border-radius: 5px;
+            border: 1px solid #555;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: var(--accent-color);
+            color: black;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .hidden { display: none; }
+
+        .user-item {
+            background: rgba(0, 0, 0, 0.1);
+            padding: 10px;
+            margin: 5px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <button class="secret-btn" onclick="openAdminModal()">AIT 🔒</button>
+        <div>
+            <button onclick="changeLang('ml')" style="padding: 4px 8px;">മലയാളം</button>
+            <button onclick="changeLang('en')" style="padding: 4px 8px;">English</button>
+            <button onclick="toggleTheme()" style="padding: 4px 8px;">🌗 Theme</button>
+        </div>
+    </div>
+
+    <div id="page1" class="card">
+        <h1>AIT</h1>
+        <h3 id="subtitle">Arafath Intelligent Thought</h3>
+        <p id="desc">AIT-ലേക്ക് സ്വാഗതം! ഭാവിയിലെ പുതിയ ആപ്പുകളും സാങ്കേതികവിദ്യകളും ഇവിടെ നിർമ്മിക്കപ്പെടുന്നു.</p>
+        <button onclick="nextPage(2)" id="joinBtn">AIT-ൽ ജോയിൻ ചെയ്യുക 🚀</button>
+    </div>
+
+    <div id="page2" class="card hidden">
+        <h2 id="signupTitle">മെംബർ രജിസ്ട്രേഷൻ</h2>
+        <input type="text" id="username" placeholder="പേര് അടിച്ചു നൽകുക"><br>
+        <button onclick="generateUserCode()">കോഡ് നേടുക ➡️</button>
+    </div>
+
+    <div id="page3" class="card hidden">
+        <h2>🎉 വിജയകരമായി ജോയിൻ ചെയ്തു!</h2>
+        <p>നിങ്ങളുടെ പ്രത്യേക AIT കോഡ് ഇതാണ്:</p>
+        <h1 id="userCode" style="color: var(--accent-color);"></h1>
+        <p>⚠️ ഈ കോഡും പേരും ഓർത്തു വെക്കുക!</p>
+        <button onclick="nextPage(4)">AIT ഫീഡിലേക്ക് കടക്കുക 📊</button>
+    </div>
+
+    <div id="page4" class="card hidden">
+        <h2>AIT Official Hub</h2>
+        <div id="adminPosts">
+            <h3>📢 പ്രഖ്യാപനങ്ങൾ & പ്ലാനുകൾ</h3>
+            <p>1. 🎮 The Creator Game (ഉടൻ വരുന്നു)</p>
+            <p>2. 🌐 AIT Official Website Launch</p>
+        </div>
+    </div>
+
+    <div id="adminPanel" class="card hidden" style="border: 2px solid red;">
+        <h2 style="color: red;">AIT Admin Control Panel</h2>
+        
+        <h3>👥 ജോയിൻ ചെയ്ത ആളുകൾ</h3>
+        <div id="userList"></div>
+
+        <hr>
+        <h3>➕ പുതിയ കാര്യങ്ങൾ ചേർക്കാൻ</h3>
+        <input type="text" id="newLink" placeholder="പുതിയ ലിങ്ക് കൊടുക്കുക"><br>
+        <textarea id="newNote" placeholder="നോട്ട് / മെസ്സേജ് ടൈപ്പ് ചെയ്യുക"></textarea><br>
+        <input type="text" id="newImg" placeholder="ചിത്രത്തിന്റെ URL ലിങ്ക്"><br>
+        <button onclick="addPost()">പോസ്റ്റ് ചെയ്യുക 📌</button>
+        <br><br>
+        <button onclick="nextPage(1)" style="background-color: #555; color: white;">ക്ലോസ് ചെയ്യുക</button>
+    </div>
+
+    <script>
+        let registeredUsers = [];
+
+        function toggleTheme() {
+            document.body.classList.toggle('light-mode');
+        }
+
+        function nextPage(pageNumber) {
+            document.querySelectorAll('.card').forEach(div => div.classList.add('hidden'));
+            document.getElementById('page' + pageNumber).classList.remove('hidden');
+        }
+
+        function generateUserCode() {
+            let name = document.getElementById('username').value;
+            if(name.trim() === "") {
+                alert("ദയവായി പേര് ടൈപ്പ് ചെയ്യുക!");
+                return;
+            }
+            let randomCode = "AIT-" + Math.floor(1000 + Math.random() * 9000);
+            document.getElementById('userCode').innerText = randomCode;
+            
+            registeredUsers.push({ name: name, code: randomCode });
+            nextPage(3);
+        }
+
+        // Secret Admin Button Logic (പാസ്‌വേഡ്: Arafat123)
+        function openAdminModal() {
+            let password = prompt("AIT ഓണറുടെ രഹസ്യ പാസ്‌വേഡ് അടിക്കുക:");
+            if (password === "Arafat123") {
+                renderUserList();
+                nextPage('AdminPanel');
+            } else {
+                alert("തെറ്റായ പാസ്‌വേഡ്! അനുവാദമില്ല.");
+            }
+        }
+
+        function renderUserList() {
+            let listDiv = document.getElementById('userList');
+            listDiv.innerHTML = "";
+            if(registeredUsers.length === 0) {
+                listDiv.innerHTML = "<p>ആരും ജോയിൻ ചെയ്തിട്ടില്ല.</p>";
+            }
+            registeredUsers.forEach((user, index) => {
+                listDiv.innerHTML += `
+                    <div class="user-item">
+                        <span><strong>${user.name}</strong> (${user.code})</span>
+                        <button onclick="deleteUser(${index})" style="background-color: red; color: white; padding: 2px 8px;">Delete</button>
+                    </div>
+                `;
+            });
+        }
+
+        function deleteUser(index) {
+            registeredUsers.splice(index, 1);
+            renderUserList();
+            alert("ആളെ ഡിലീറ്റ് ആക്കി!");
+        }
+
+        function addPost() {
+            let link = document.getElementById('newLink').value;
+            let note = document.getElementById('newNote').value;
+            let img = document.getElementById('newImg').value;
+            
+            let postsArea = document.getElementById('adminPosts');
+            
+            if(note) postsArea.innerHTML += `<p>📝 ${note}</p>`;
+            if(link) postsArea.innerHTML += `<p>🔗 <a href="${link}" target="_blank">${link}</a></p>`;
+            if(img) postsArea.innerHTML += `<img src="${img}" style="width: 100%; border-radius: 10px; margin-top: 5px;">`;
+
+            alert("വെബ്‌സൈറ്റിലേക്ക് ചേർത്തു!");
+            document.getElementById('newLink').value = "";
+            document.getElementById('newNote').value = "";
+            document.getElementById('newImg').value = "";
+        }
+
+        function changeLang(lang) {
+            if(lang === 'en') {
+                document.getElementById('subtitle').innerText = "Arafath Intelligent Thought";
+                document.getElementById('desc').innerText = "Welcome to AIT! Building future apps, games, and technology here.";
+                document.getElementById('joinBtn').innerText = "Join AIT 🚀";
+                document.getElementById('signupTitle').innerText = "Member Registration";
+            } else {
+                document.getElementById('subtitle').innerText = "Arafath Intelligent Thought";
+                document.getElementById('desc').innerText = "AIT-ലേക്ക് സ്വാഗതം! ഭാവിയിലെ പുതിയ ആപ്പുകളും സാങ്കേതികവിദ്യകളും ഇവിടെ നിർമ്മിക്കപ്പെടുന്നു.";
+                document.getElementById('joinBtn').innerText = "AIT-ൽ ജോയിൻ ചെയ്യുക 🚀";
+                document.getElementById('signupTitle').innerText = "മെംബർ രജിസ്ട്രേഷൻ";
+            }
+        }
+    </script>
+</body>
+</html>

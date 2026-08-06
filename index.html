@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIT - Official Portal</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: sans-serif; }
+        body { background: #0d1b2a; color: white; padding: 15px; display: flex; justify-content: center; }
+        .main-card { background: #1b263b; border-radius: 15px; padding: 20px; width: 100%; max-width: 500px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
+        .brand { font-size: 24px; font-weight: bold; color: #ff416c; text-align: center; margin-bottom: 10px; }
+        .box-card { background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px; margin-bottom: 15px; border: 1px solid #778da9; }
+        .box-title { font-size: 15px; font-weight: bold; color: #f9d423; margin-bottom: 10px; }
+        input, select { width: 100%; padding: 10px; margin-bottom: 10px; background: #0d1b2a; border: 1px solid #778da9; border-radius: 5px; color: white; }
+        .btn { width: 100%; padding: 10px; background: #38ef7d; color: black; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; margin-bottom: 5px; }
+        .btn-del { background: #ff416c; color: white; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer; }
+        .nav-tabs { display: flex; gap: 5px; margin-bottom: 15px; }
+        .tab-btn { flex: 1; padding: 8px; background: #0d1b2a; border: 1px solid #778da9; color: white; border-radius: 5px; cursor: pointer; }
+        .tab-btn.active { background: #38ef7d; color: black; font-weight: bold; }
+        .row { background: #0d1b2a; padding: 8px; border-radius: 5px; margin-bottom: 5px; display: flex; justify-content: space-between; align-items: center; font-size: 13px; }
+        .link-item { display: block; background: #0d1b2a; color: #38ef7d; padding: 10px; border-radius: 5px; text-decoration: none; margin-bottom: 5px; font-weight: bold; }
+        iframe { width: 100%; height: 220px; border: none; background: white; border-radius: 5px; margin-top: 5px; }
+    </style>
+</head>
+<body>
+
+    <div class="main-card">
+        
+        <!-- USER PAGE -->
+        <div id="userPage">
+            <div class="brand">⚡ AIT PORTAL</div>
+            
+            <div class="nav-tabs">
+                <button class="tab-btn active" onclick="showTab('homeTab', this)">🏠 Home</button>
+                <button class="tab-btn" onclick="showTab('linksTab', this)">🔗 Links</button>
+                <button class="tab-btn" onclick="showTab('gamesTab', this)">🎮 Games</button>
+            </div>
+
+            <!-- HOME TAB -->
+            <div id="homeTab">
+                <div class="box-card">
+                    <div id="regBox">
+                        <div class="box-title">👤 New Registration</div>
+                        <input type="text" id="regName" placeholder="പേര് നൽകുക">
+                        <button class="btn" onclick="register()">Next ➔</button>
+                        <p style="font-size:12px; color:#38ef7d; cursor:pointer;" onclick="toggleAuth('login')">ലോഗിൻ ചെയ്യണോ?</p>
+                    </div>
+
+                    <div id="codeBox" style="display:none; text-align:center;">
+                        <div class="box-title" style="color:#38ef7d;">🎉 Success!</div>
+                        <p>AIT Code: <b id="generatedCode" style="color:#f9d423; font-size:18px;"></b></p>
+                        <button class="btn" style="margin-top:10px;" onclick="toggleAuth('reg')">OK</button>
+                    </div>
+
+                    <div id="loginBox" style="display:none;">
+                        <div class="box-title">🔑 Login</div>
+                        <input type="text" id="loginName" placeholder="പേര്">
+                        <input type="text" id="loginCode" placeholder="AIT Code">
+                        <button class="btn" onclick="login()">Login</button>
+                        <p style="font-size:12px; color:#38ef7d; cursor:pointer;" onclick="toggleAuth('reg')">രജിസ്റ്റർ ചെയ്യണോ?</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LINKS TAB -->
+            <div id="linksTab" style="display:none;">
+                <div class="box-card">
+                    <div class="box-title">🔗 Useful Links / YouTube Links</div>
+                    <div id="linksList"><i>ലിങ്കുകൾ ഒന്നും ലഭ്യമല്ല.</i></div>
+                </div>
+            </div>
+
+            <!-- GAMES TAB -->
+            <div id="gamesTab" style="display:none;">
+                <div class="box-card">
+                    <div class="box-title">🎮 Choose Game</div>
+                    <select id="gameSelect" onchange="loadGame()">
+                        <option value="dino">🦖 Dino Run</option>
+                        <option value="ttt">❌ Tic-Tac-Toe</option>
+                        <option value="snake">🐍 Snake Game</option>
+                    </select>
+                    <iframe id="gameFrame"></iframe>
+                </div>
+            </div>
+
+            <div style="text-align:center; margin-top:10px;">
+                <button style="background:none; border:none; color:#778da9; cursor:pointer; font-size:11px;" onclick="toggleAdminPrompt()">• Admin Center •</button>
+                <div id="adminPassBox" style="display:none; margin-top:5px;">
+                    <input type="password" id="adminPass" placeholder="Admin Password">
+                    <button class="btn" style="background:#ff416c; color:white;" onclick="openAdmin()">Open</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ADMIN PAGE -->
+        <div id="adminPage" style="display:none;">
+            <div class="brand">⚙️ ADMIN CENTER</div>
+            <button class="btn-del" style="width:100%; margin-bottom:10px;" onclick="closeAdmin()">Exit Admin</button>
+
+            <div class="box-card">
+                <div class="box-title">👥 Users</div>
+                <div id="adminUserList"></div>
+            </div>
+
+            <div class="box-card">
+                <div class="box-title">🔗 Add Link</div>
+                <input type="text" id="linkTitle" placeholder="Link Title / പേര്">
+                <input type="text" id="linkUrl" placeholder="https://...">
+                <button class="btn" onclick="addLink()">Add Link</button>
+                <div id="adminLinkList" style="margin-top:10px;"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        const ADMIN_PASS = "AIT2012";
+        let users = JSON.parse(localStorage.getItem('ait_u')) || [];
+        let links = JSON.parse(localStorage.getItem('ait_l')) || [];
+
+        // Built-in Games Code
+        const games = {
+            dino: `<html><body style="margin:0;background:#111;color:#fff;text-align:center;font-family:sans-serif;"><canvas id="c" width="300" height="150" style="background:#222;margin-top:10px;"></canvas><p style="font-size:12px;">Click to Jump!</p><script>c=document.getElementById("c");ctx=c.getContext("2d");d={y:100,dy:0};cax=300;score=0;go=false;function loop(){if(!go){d.dy+=0.5;d.y+=d.dy;if(d.y>100){d.y=100;d.dy=0;}cax-=4;if(cax<-10){cax=300;score+=10;}if(cax<35&&cax>15&&d.y>80)go=true;}ctx.clearRect(0,0,300,150);ctx.fillStyle="#38ef7d";ctx.fillRect(20,d.y,15,20);ctx.fillStyle="#ff416c";ctx.fillRect(cax,105,10,15);ctx.fillStyle="#fff";ctx.fillText("Score: "+score,10,20);if(go)ctx.fillText("GAME OVER! Click to restart",50,75);requestAnimationFrame(loop);}c.onclick=()=>{if(go){go=false;cax=300;score=0;}else if(d.y==100)d.dy=-8;};loop();<\/script></body></html>`,
+            ttt: `<html><body style="margin:0;background:#111;color:#fff;text-align:center;font-family:sans-serif;"><h3 style="margin:5px;">Tic-Tac-Toe</h3><div id="b" style="display:grid;grid-template-columns:repeat(3,50px);gap:5px;justify-content:center;margin-top:10px;"></div><script>b=document.getElementById("b");p="X";m=["","","","","","","","",""];function render(){b.innerHTML="";m.forEach((v,i)=>{b.innerHTML+='<button style="width:50px;height:50px;font-size:20px;background:#222;color:#fff;border:1px solid #555;" onclick="play('+i+')">'+v+'</button>';});}window.play=(i)=>{if(!m[i]){m[i]=p;p=p=="X"?"O":"X";render();}};render();<\/script></body></html>`,
+            snake: `<html><body style="margin:0;background:#111;color:#fff;text-align:center;font-family:sans-serif;"><canvas id="s" width="200" height="150" style="background:#222;margin-top:5px;"></canvas><p style="font-size:11px;">Use Arrow keys or tap sides</p><script>c=document.getElementById("s");ctx=c.getContext("2d");sn=[{x:10,y:10}];dx=1;dy=0;fx=5;fy=5;function run(){x=sn[0].x+dx;y=sn[0].y+dy;sn.unshift({x:x,y:y});if(x==fx&&y==fy){fx=Math.floor(Math.random()*19);fy=Math.floor(Math.random()*14);}else sn.pop();ctx.clearRect(0,0,200,150);ctx.fillStyle="red";ctx.fillRect(fx*10,fy*10,8,8);ctx.fillStyle="#38ef7d";sn.forEach(p=>ctx.fillRect(p.x*10,p.y*10,8,8));}setInterval(run,150);window.onkeydown=e=>{if(e.key=="ArrowUp"&&dy==0){dx=0;dy=-1;}if(e.key=="ArrowDown"&&dy==0){dx=0;dy=1;}if(e.key=="ArrowLeft"&&dx==0){dx=-1;dy=0;}if(e.key=="ArrowRight"&&dx==0){dx=1;dy=0;};};c.onclick=e=>{if(e.clientX<100){if(dx==0){dx=-1;dy=0;}else{dx=0;dy=-1;}}else{if(dx==0){dx=1;dy=0;}else{dx=0;dy=1;}}};<\/script></body></html>`
+        };
+
+        function showTab(id, btn) {
+            document.getElementById('homeTab').style.display = 'none';
+            document.getElementById('linksTab').style.display = 'none';
+            document.getElementById('gamesTab').style.display = 'none';
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(id).style.display = 'block';
+            btn.classList.add('active');
+            if(id==='linksTab') renderLinks();
+            if(id==='gamesTab') loadGame();
+        }
+
+        function toggleAuth(type) {
+            document.getElementById("regBox").style.display = type==='reg'?'block':'none';
+            document.getElementById("loginBox").style.display = type==='login'?'block':'none';
+            document.getElementById("codeBox").style.display = 'none';
+        }
+
+        function register() {
+            let n = document.getElementById("regName").value.trim();
+            if(!n) return alert("പേര് ടൈപ്പ് ചെയ്യുക!");
+            let c = "AIT-" + Math.floor(1000 + Math.random()*9000);
+            users.push({name:n, code:c});
+            localStorage.setItem('ait_u', JSON.stringify(users));
+            document.getElementById("regBox").style.display = "none";
+            document.getElementById("codeBox").style.display = "block";
+            document.getElementById("generatedCode").innerText = c;
+            document.getElementById("regName").value = "";
+        }
+
+        function login() {
+            let n = document.getElementById("loginName").value.trim();
+            let c = document.getElementById("loginCode").value.trim();
+            let found = users.find(u => u.name.toLowerCase()===n.toLowerCase() && u.code===c);
+            if(found) alert("✅ Login Successful! Welcome " + found.name);
+            else alert("❌ Invalid Name or Code!");
+        }
+
+        function loadGame() {
+            let g = document.getElementById("gameSelect").value;
+            document.getElementById("gameFrame").srcdoc = games[g];
+        }
+
+        function renderLinks() {
+            let box = document.getElementById("linksList");
+            box.innerHTML = links.length ? "" : "<i>ലിങ്കുകൾ ഒന്നും ലഭ്യമല്ല.</i>";
+            links.forEach(l => {
+                box.innerHTML += `<a href="${l.url}" target="_blank" class="link-item">🔗 ${l.title} ➔</a>`;
+            });
+        }
+
+        // Admin Actions
+        function toggleAdminPrompt() {
+            let p = document.getElementById("adminPassBox");
+            p.style.display = p.style.display==='none'?'block':'none';
+        }
+
+        function openAdmin() {
+            if(document.getElementById("adminPass").value === ADMIN_PASS) {
+                document.getElementById("userPage").style.display = "none";
+                document.getElementById("adminPage").style.display = "block";
+                renderAdmin();
+            } else alert("❌ Wrong Password!");
+        }
+
+        function closeAdmin() {
+            document.getElementById("adminPage").style.display = "none";
+            document.getElementById("userPage").style.display = "block";
+        }
+
+        function renderAdmin() {
+            let uBox = document.getElementById("adminUserList");
+            uBox.innerHTML = users.length ? "" : "<i>യൂസർമാർ ഇല്ല.</i>";
+            users.forEach((u, i) => {
+                uBox.innerHTML += `<div class="row"><span>${u.name} (${u.code})</span><button class="btn-del" onclick="delUser(${i})">Del</button></div>`;
+            });
+
+            let lBox = document.getElementById("adminLinkList");
+            lBox.innerHTML = links.length ? "" : "<i>ലിങ്കുകൾ ഇല്ല.</i>";
+            links.forEach((l, i) => {
+                lBox.innerHTML += `<div class="row"><span>${l.title}</span><button class="btn-del" onclick="delLink(${i})">Del</button></div>`;
+            });
+        }
+
+        function addLink() {
+            let t = document.getElementById("linkTitle").value.trim();
+            let u = document.getElementById("linkUrl").value.trim();
+            if(!t || !u) return alert("വിവരങ്ങൾ നൽകുക!");
+            if(!u.startsWith('http')) u = 'https://' + u;
+            links.push({title:t, url:u});
+            localStorage.setItem('ait_l', JSON.stringify(links));
+            document.getElementById("linkTitle").value = "";
+            document.getElementById("linkUrl").value = "";
+                renderAdmin();
+        }
+
+        function delUser(i) { users.splice(i,1); localStorage.setItem('ait_u', JSON.stringify(users)); renderAdmin(); }
+        function delLink(i) { links.splice(i,1); localStorage.setItem('ait_l', JSON.stringify(links)); renderAdmin(); }
+    </script>
+</body>
+</html>

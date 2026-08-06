@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIT - Official Portal</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 40%, #415a77 100%); color: #ffffff; min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 15px; }
+        .main-card { background: rgba(13, 27, 42, 0.95); border: 2px solid #778da9; border-radius: 20px; padding: 25px; width: 100%; max-width: 650px; box-shadow: 0 15px 35px rgba(0,0,0,0.6); }
+        .top-nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+        .brand { font-size: 28px; font-weight: 900; background: linear-gradient(to right, #ff416c, #ff4b2b, #f9d423); -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: flex; align-items: center; gap: 8px; }
+        .brand-icon { width: 32px; height: 32px; background: #ff416c; border-radius: 50%; display: inline-flex; justify-content: center; align-items: center; color: white; font-size: 16px; font-weight: bold; }
+        .box-card { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); padding: 18px; border-radius: 15px; margin-bottom: 20px; }
+        .box-title { font-size: 16px; font-weight: bold; color: #f9d423; margin-bottom: 12px; }
+        input, textarea, select { width: 100%; padding: 12px; margin-bottom: 10px; background: #1b263b; border: 1px solid #778da9; border-radius: 8px; color: white; font-size: 14px; }
+        .btn-action { width: 100%; padding: 12px; background: linear-gradient(90deg, #11998e, #38ef7d); color: #000; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 15px; margin-bottom: 5px; }
+        .btn-delete { background: #ff416c; color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer; font-size: 12px; }
+        .toggle-text { font-size: 12px; color: #38ef7d; cursor: pointer; text-decoration: underline; margin-top: 8px; display: inline-block; }
+        .nav-tabs { display: flex; gap: 10px; margin-bottom: 15px; }
+        .tab-btn { flex: 1; padding: 10px; background: #1b263b; border: 1px solid #778da9; color: white; border-radius: 8px; cursor: pointer; font-weight: bold; }
+        .tab-btn.active { background: #38ef7d; color: #000; }
+        .user-data-row { background: #1b263b; padding: 10px; border-radius: 6px; margin-bottom: 8px; font-size: 13px; display: flex; justify-content: space-between; align-items: center; }
+        .game-frame { width: 100%; height: 300px; border: 1px solid #778da9; border-radius: 8px; background: white; margin-top: 10px; }
+    </style>
+</head>
+<body>
+
+    <div class="main-card">
+        
+        <!-- MAIN WEBSITE PAGE -->
+        <div id="userPage">
+            <div class="top-nav">
+                <div class="brand"><span class="brand-icon">⚡</span> AIT PORTAL</div>
+            </div>
+            <p style="color: #e0e1dd; margin-bottom: 15px; font-size: 13px;">അറഫാത്ത് ഇൻഫർമേഷൻ ടെക്നോളജി • ഒഫീഷ്യൽ പോർട്ടൽ</p>
+
+            <!-- Navigation Tabs -->
+            <div class="nav-tabs">
+                <button class="tab-btn active" onclick="showTab('homeTab')">🏠 Home</button>
+                <button class="tab-btn" onclick="showTab('gamesTab')">🎮 Games</button>
+                <button class="tab-btn" onclick="showTab('videosTab')">🎬 Videos</button>
+            </div>
+
+            <!-- TAB 1: HOME (USER REGISTRATION / LOGIN) -->
+            <div id="homeTab">
+                <div class="box-card">
+                    <!-- Step 1: Register Name Only -->
+                    <div id="regStep1">
+                        <div class="box-title">👤 New Registration</div>
+                        <input type="text" id="regName" placeholder="നിങ്ങളുടെ പേര് നൽകുക (Enter Name)">
+                        <button class="btn-action" onclick="goToStep2()">Next ➔</button>
+                        <span class="toggle-text" onclick="showLoginOnly()">മുമ്പ് ചേർന്നതാണോ? Login ചെയ്യുക</span>
+                    </div>
+
+                    <!-- Step 2: Registration Success Page -->
+                    <div id="regStep2" style="display:none; text-align:center;">
+                        <div class="box-title" style="color:#38ef7d;">🎉 Registration Successful!</div>
+                        <p style="margin-bottom:10px;">നിങ്ങളുടെ AIT Unique Code ഇവിടെ കാണാം:</p>
+                        <div id="generatedCode" style="font-size: 24px; font-weight: bold; color: #f9d423; background: #1b263b; padding: 10px; border-radius: 8px; margin-bottom: 15px;"></div>
+                        <p style="font-size:12px; color:#aaa; margin-bottom:15px;">(അടുത്ത തവണ ലോഗിൻ ചെയ്യാൻ ഈ കോഡും പേരും ഓർത്തു വെക്കുക!)</p>
+                        <button class="btn-action" onclick="finishReg()">Home-ലേക്ക് പോകുക</button>
+                    </div>
+
+                    <!-- Existing User Login -->
+                    <div id="loginBox" style="display:none;">
+                        <div class="box-title">🔑 Member Login</div>
+                        <input type="text" id="loginName" placeholder="നിങ്ങളുടെ പേര് (Username)">
+                        <input type="text" id="loginCode" placeholder="നിങ്ങളുടെ AIT Code (e.g. AIT-1234)">
+                        <button class="btn-action" onclick="loginUser()">Login</button>
+                        <span class="toggle-text" onclick="showRegOnly()">പുതിയ ആളാണോ? Register ചെയ്യുക</span>
+                    </div>
+
+                    <div id="loginWelcome" style="display:none; text-align:center; padding:10px; color:#38ef7d; font-weight:bold;"></div>
+                </div>
+            </div>
+
+            <!-- TAB 2: GAMES -->
+            <div id="gamesTab" style="display:none;">
+                <div class="box-card">
+                    <div class="box-title">🎮 Play Games</div>
+                    <div id="gamesList"><i>ഗെയിമുകൾ ഒന്നും ലഭ്യമല്ല. അഡ്മിൻ ഗെയിം ചേർത്താൽ ഇവിടെ കാണാം.</i></div>
+                </div>
+            </div>
+
+            <!-- TAB 3: VIDEOS -->
+            <div id="videosTab" style="display:none;">
+                <div class="box-card">
+                    <div class="box-title">🎬 Uploaded Videos</div>
+                    <div id="videosList"><i>വീഡിയോകൾ ഒന്നും ലഭ്യമല്ല.</i></div>
+                </div>
+            </div>
+
+            <!-- Footer & Admin Button -->
+            <div style="text-align: center; margin-top: 15px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 10px;">
+                <button style="background:none; border:none; color:#778da9; cursor:pointer; font-size:12px;" onclick="showAdminLoginPrompt()">• Admin Control Center •</button>
+                <div id="adminAuthBox" style="display:none; margin-top:10px;">
+                    <input type="password" id="adminPassInput" placeholder="Enter Admin Password">
+                    <button class="btn-action" style="background:#ff416c; color:white;" onclick="checkAdminPass()">Open Admin Page</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- SEPARATE ADMIN CONTROL CENTER PAGE -->
+        <div id="adminPage" style="display:none;">
+            <div class="top-nav">
+                <div class="brand"><span class="brand-icon">⚙️</span> AIT CONTROL CENTER</div>
+                <button onclick="exitAdmin()" style="background:#ff416c; color:white; border:none; padding:6px 12px; border-radius:6px; cursor:pointer; font-weight:bold;">Exit Admin</button>
+            </div>
+            
+            <!-- Admin Section 1: Manage Users -->
+            <div class="box-card">
+                <div class="box-title">👥 Registered Users Management</div>
+                <div id="userListAdmin"></div>
+            </div>
+
+            <!-- Admin Section 2: Upload HTML Code Games -->
+            <div class="box-card">
+                <div class="box-title">🎮 Upload HTML Game Code</div>
+                <input type="text" id="gameTitle" placeholder="Game Name / Title">
+                <textarea id="gameCode" rows="5" placeholder="Paste HTML / JS Code here..."></textarea>
+                <button class="btn-action" onclick="uploadGame()">Upload Game to Website</button>
+            </div>
+
+            <!-- Admin Section 3: Add Videos -->
+            <div class="box-card">
+                <div class="box-title">🎬 Upload Video Link</div>
+                <input type="text" id="videoTitle" placeholder="Video Title">
+                <input type="text" id="videoLink" placeholder="YouTube Embed Link or URL">
+                <button class="btn-action" onclick="uploadVideo()">Upload Video</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        const ADMIN_PASS = "AIT2012";
+
+        // LocalStorage Data
+        let usersData = JSON.parse(localStorage.getItem('ait_users')) || [];
+        let gamesData = JSON.parse(localStorage.getItem('ait_games')) || [];
+        let videosData = JSON.parse(localStorage.getItem('ait_videos')) || [];
+
+        // Tab Switching
+        function showTab(tabId) {
+            document.getElementById('homeTab').style.display = 'none';
+            document.getElementById('gamesTab').style.display = 'none';
+            document.getElementById('videosTab').style.display = 'none';
+            
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            
+            document.getElementById(tabId).style.display = 'block';
+            event.target.classList.add('active');
+
+            if(tabId === 'gamesTab') renderGames();
+            if(tabId === 'videosTab') renderVideos();
+        }
+
+        // Registration Flow
+        let tempUser = {};
+        function goToStep2() {
+            let name = document.getElementById("regName").value.trim();
+            if(!name) { alert("ദയവായി പേര് ടൈപ്പ് ചെയ്യുക!"); return; }
+
+            let code = "AIT-" + Math.floor(1000 + Math.random() * 9000);
+            tempUser = { name: name, code: code };
+
+            usersData.push(tempUser);
+            localStorage.setItem('ait_users', JSON.stringify(usersData));
+
+            document.getElementById("regStep1").style.display = "none";
+            document.getElementById("regStep2").style.display = "block";
+            document.getElementById("generatedCode").innerText = code;
+        }
+
+        function finishReg() {
+            document.getElementById("regStep2").style.display = "none";
+            document.getElementById("regStep1").style.display = "block";
+                document.getElementById("regName").value = "";
+            alert("ലോഗിൻ ചെയ്യാൻ ഇനി പേരും ലഭിച്ച കോഡും ഉപയോഗിക്കുക!");
+        }
+
+        function showLoginOnly() {
+            document.getElementById("regStep1").style.display = "none";
+            document.getElementById("loginBox").style.display = "block";
+        }
+
+        function showRegOnly() {
+            document.getElementById("loginBox").style.display = "none";
+            document.getElementById("regStep1").style.display = "block";
+        }
+
+        function loginUser() {
+            let name = document.getElementById("loginName").value.trim();
+            let code = document.getElementById("loginCode").value.trim();
+
+            let found = usersData.find(u => u.name.toLowerCase() === name.toLowerCase() && u.code === code);
+
+            if(found) {
+                document.getElementById("loginBox").style.display = "none";
+                let welcome = document.getElementById("loginWelcome");
+                welcome.style.display = "block";
+                welcome.innerHTML = `✅ Welcome Back, ${found.name}! Login Successful.`;
+            } else {
+                alert("❌ പേരോ കോഡോ തെറ്റാണ്! ശരിയായി അടിച്ചു കൊടുക്കുക.");
+            }
+        }
+
+        // Admin Security & Navigation
+        function showAdminLoginPrompt() {
+            let box = document.getElementById("adminAuthBox");
+            box.style.display = box.style.display === "block" ? "none" : "block";
+        }
+
+        function checkAdminPass() {
+            let pass = document.getElementById("adminPassInput").value;
+            if(pass === ADMIN_PASS) {
+                document.getElementById("userPage").style.display = "none";
+                document.getElementById("adminPage").style.display = "block";
+                document.getElementById("adminPassInput").value = "";
+                document.getElementById("adminAuthBox").style.display = "none";
+                renderAdminUsers();
+            } else {
+                alert("❌ Wrong Admin Password!");
+            }
+        }
+
+        function exitAdmin() {
+            document.getElementById("adminPage").style.display = "none";
+            document.getElementById("userPage").style.display = "block";
+        }
+
+        // Admin User Management & Delete
+        function renderAdminUsers() {
+            let container = document.getElementById("userListAdmin");
+            container.innerHTML = "";
+
+            if(usersData.length === 0) {
+                container.innerHTML = "<i>യൂസർമാർ ആരും ഇല്ല.</i>";
+                return;
+            }
+
+            usersData.forEach((u, index) => {
+                container.innerHTML += `
+                    <div class="user-data-row">
+                        <div>👤 <b>${u.name}</b> | 🆔 Code: <span style="color:#38ef7d;">${u.code}</span></div>
+                        <button class="btn-delete" onclick="deleteUser(${index})">Delete 🗑️</button>
+                    </div>
+                `;
+            });
+        }
+
+        function deleteUser(index) {
+            if(confirm("ഈ യൂസറെ ഡിലീറ്റ് ചെയ്യണോ?")) {
+                usersData.splice(index, 1);
+                localStorage.setItem('ait_users', JSON.stringify(usersData));
+                renderAdminUsers();
+            }
+        }
+
+        // HTML Game Upload & Render
+        function uploadGame() {
+            let title = document.getElementById("gameTitle").value.trim();
+            let code = document.getElementById("gameCode").value.trim();
+
+            if(!title || !code) { alert("ഗെയിം പേരും HTML കോഡും നൽകുക!"); return; }
+
+            gamesData.push({ title: title, code: code });
+            localStorage.setItem('ait_games', JSON.stringify(gamesData));
+
+            document.getElementById("gameTitle").value = "";
+            document.getElementById("gameCode").value = "";
+            alert("🎮 Game Successfully Uploaded!");
+        }
+
+        function renderGames() {
+            let area = document.getElementById("gamesList");
+            area.innerHTML = "";
+
+            if(gamesData.length === 0) {
+                area.innerHTML = "<i>ഗെയിമുകൾ ഒന്നും അപ്‌ലോഡ് ചെയ്തിട്ടില്ല.</i>";
+                return;
+            }
+
+            gamesData.forEach(g => {
+                let iframe = document.createElement('iframe');
+                iframe.className = "game-frame";
+                iframe.srcdoc = g.code;
+
+                let div = document.createElement('div');
+                div.style.marginBottom = "20px";
+                div.innerHTML = `<h4 style="color:#f9d423; margin-bottom:5px;">🕹️ ${g.title}</h4>`;
+                div.appendChild(iframe);
+
+                area.appendChild(div);
+            });
+        }
+
+        // Video Upload & Render
+        function uploadVideo() {
+            let title = document.getElementById("videoTitle").value.trim();
+            let link = document.getElementById("videoLink").value.trim();
+
+            if(!title || !link) { alert("വീഡിയോ തലക്കെട്ടും ലിങ്കും നൽകുക!"); return; }
+
+            videosData.push({ title: title, link: link });
+            localStorage.setItem('ait_videos', JSON.stringify(videosData));
+
+            document.getElementById("videoTitle").value = "";
+            document.getElementById("videoLink").value = "";
+            alert("🎬 Video Successfully Uploaded!");
+        }
+
+        function renderVideos() {
+            let area = document.getElementById("videosList");
+            area.innerHTML = "";
+
+            if(videosData.length === 0) {
+                area.innerHTML = "<i>വീഡിയോകൾ ഒന്നും ഇല്ല.</i>";
+                return;
+            }
+
+            videosData.forEach(v => {
+                area.innerHTML += `
+                    <div style="background:#1b263b; padding:10px; border-radius:8px; margin-bottom:10px;">
+                        <h4 style="color:#f9d423;">🎥 ${v.title}</h4>
+                        <a href="${v.link}" target="_blank" style="color:#38ef7d; font-size:13px;">Watch Video ➔</a>
+                    </div>
+                `;
+            });
+        }
+    </script>
+</body>
+</html>

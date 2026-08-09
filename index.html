@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mega Text to PNG Converter</title>
+    
+    <!-- പലതരം സ്റ്റൈലുകൾക്ക് വേണ്ടിയുള്ള കിടിലൻ ഗൂഗിൾ ഫോണ്ടുകൾ -->
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Permanent+Marker&family=Bungee+Shade&family=Monoton&family=Creepster&family=Lobster&family=Orbitron:wght@700&family=Pacifico&family=Righteous&family=Rubik+Glitch&family=Russo+One&family=Special+Elite&display=swap" rel="stylesheet">
+    
+    <!-- HTML-നെ ചിത്രമാക്കാൻ സഹായിക്കുന്ന ലൈബ്രറി -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background: #0f0f12; color: #fff; min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 20px; }
+        
+        .container { background: #181820; border-radius: 20px; padding: 25px; width: 100%; max-width: 600px; box-shadow: 0 10px 40px rgba(0,0,0,0.7); text-align: center; border: 1px solid #2a2a3a; }
+        h1 { font-size: 22px; margin-bottom: 20px; color: #ff0055; text-shadow: 0 0 15px rgba(255,0,85,0.4); }
+        
+        input[type="text"] { width: 100%; background: #22222e; border: 2px solid #333344; border-radius: 10px; color: #fff; padding: 15px; font-size: 18px; outline: none; transition: 0.3s; text-align: center; }
+        input[type="text"]:focus { border-color: #ff0055; }
+        
+        .controls { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 20px 0; }
+        select, button { background: #22222e; color: #fff; border: 2px solid #333344; padding: 12px; border-radius: 10px; font-size: 15px; cursor: pointer; outline: none; font-weight: bold; width: 100%; }
+        select:focus, button:hover { border-color: #ff0055; background: #2a2a3a; }
+        
+        button.btn-download { background: #ff0055; color: #fff; border: none; font-size: 16px; box-shadow: 0 4px 15px rgba(255,0,85,0.4); }
+        button.btn-download:hover { background: #e0004c; transform: translateY(-2px); }
+        button.btn-download:active { transform: translateY(0); }
+
+        /* Output Viewport */
+        .preview-area { background: #0b0b0f; border: 2px dashed #333344; border-radius: 15px; min-height: 180px; display: flex; justify-content: center; align-items: center; padding: 20px; margin-top: 15px; overflow: hidden; position: relative; }
+        
+        /* പ്രധാനപ്പെട്ട ഭാഗം: ഇതിനെയാണ് നമ്മൾ PNG ആക്കുന്നത്. Background transparent ആണ് */
+        #captureTarget { padding: 20px; background: transparent; display: inline-block; word-break: break-all; text-align: center; max-width: 100%; }
+
+        /* ================= 20 കിടിലൻ സ്റ്റൈലുകൾ ================= */
+        
+        .st-minecraft { font-family: 'Press Start 2P', monospace; font-size: 22px; color: #55FF55; text-shadow: 3px 3px 0px #000; letter-spacing: 2px; }
+        .st-neon-pink { font-family: 'Orbitron', sans-serif; font-size: 32px; color: #fff; text-shadow: 0 0 5px #fff, 0 0 10px #ff0055, 0 0 20px #ff0055, 0 0 40px #ff0055; }
+        .st-neon-blue { font-family: 'Orbitron', sans-serif; font-size: 32px; color: #fff; text-shadow: 0 0 5px #fff, 0 0 10px #00d2ff, 0 0 20px #00d2ff, 0 0 40px #00d2ff; }
+        .st-retro-hacker { font-family: monospace; font-size: 26px; color: #00ff00; text-shadow: 0 0 8px #00ff00; font-weight: bold; }
+        .st-graffiti { font-family: 'Permanent Marker', cursive; font-size: 36px; color: #fcee21; text-shadow: 3px 3px 0px #ff0055; }
+        .st-horror { font-family: 'Creepster', cursive; font-size: 42px; color: #ff3333; text-shadow: 2px 2px 4px #000; letter-spacing: 3px; }
+        .st-vintage { font-family: 'Special Elite', cursive; font-size: 30px; color: #f4ecd8; text-shadow: 1px 1px 1px #a19275; }
+        .st-cyberpunk { font-family: 'Russo One', sans-serif; font-size: 34px; color: #00f0ff; text-shadow: 3px 3px 0px #ff007f; letter-spacing: 1px; }
+        .st-glitch { font-family: 'Rubik Glitch', cursive; font-size: 36px; color: #fff; text-shadow: 2px -2px #ff0055, -2px 2px #00f0ff; }
+        .st-gold { font-family: 'Russo One', sans-serif; font-size: 34px; color: #ffd700; text-shadow: 1px 1px 0px #b59410, 2px 2px 0px #91750c, 4px 4px 5px rgba(0,0,0,0.5); }
+        .st-fire { font-family: 'Russo One', sans-serif; font-size: 34px; color: #fff; text-shadow: 0 -2px 4px #ff3300, 0 -4px 10px #ff9900, 0 -10px 20px #ffcc00; }
+        .st-ice { font-family: 'Orbitron', sans-serif; font-size: 32px; color: #e0f7fa; text-shadow: 0 0 10px #80deea, 0 0 20px #00bcd4; }
+        .st-comic { font-family: 'Comic Sans MS', sans-serif; font-size: 34px; color: #ffeb3b; -webkit-text-stroke: 2px #000; text-shadow: 3px 3px 0px #000; font-weight: bold; }
+        .st-monoton { font-family: 'Monoton', cursive; font-size: 36px; color: #e040fb; text-shadow: 0 0 10px rgba(224,64,251,0.5); }
+        .st-bungee { font-family: 'Bungee Shade', cursive; font-size: 32px; color: #ff5722; }
+        .st-candy { font-family: 'Lobster', cursive; font-size: 36px; color: #ff4081; text-shadow: 2px 2px 0px #fff, 4px 4px 0px #ff80ab; }
+        .st-smooth { font-family: 'Pacifico', cursive; font-size: 34px; color: #4caf50; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+        .st-luxury { font-family: 'Righteous', cursive; font-size: 34px; color: #fff; background: linear-gradient(45deg, #ff0055, #7000ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .st-shadow { font-family: 'Russo One', sans-serif; font-size: 34px; color: #fff; text-shadow: 0 1px 0 #ccc, 0 2px 0 #c5c5c5, 0 3px 0 #bbb, 0 4px 0 #b0b0b0, 0 5px 0 #aaa, 0 6px 1px rgba(0,0,0,.1), 0 0 5px rgba(0,0,0,.1), 0 1px 3px rgba(0,0,0,.3), 0 3px 5px rgba(0,0,0,.2), 0 5px 10px rgba(0,0,0,.25), 0 10px 10px rgba(0,0,0,.2), 0 20px 20px rgba(0,0,0,.15); }
+        .st-wood { font-family: 'Special Elite', cursive; font-size: 32px; color: #8d6e63; text-shadow: 2px 2px 2px #4e342e; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>📸 Text to PNG Generator</h1>
+        
+        <input type="text" id="inputText" placeholder="ഇവിടെ ടൈപ്പ് ചെയ്യൂ..." value="Arafath">
+        
+        <div class="controls">
+            <select id="styleSelect" onchange="updateStyle()">
+                <!-- കൃത്യം 20 വ്യത്യസ്ത സ്റ്റൈലുകൾ ഇവിടെ തിരഞ്ഞെടുക്കാം -->
+                <option value="st-minecraft">🟩 1. Minecraft Style</option>
+                <option value="st-neon-pink">💗 2. Neon Pink</option>
+                <option value="st-neon-blue">💙 3. Neon Blue</option>
+                <option value="st-cyberpunk">🤖 4. Cyberpunk</option>
+                <option value="st-glitch">📺 5. Glitch Effect</option>
+                <option value="st-graffiti">🎨 6. Graffiti Pop</option>
+                <option value="st-horror">🧛 7. Horror Blood</option>
+                <option value="st-retro-hacker">📟 8. Retro Hacker</option>
+                <option value="st-gold">👑 9. Luxury Gold</option>
+                <option value="st-fire">🔥 10. Fire Flame</option>
+                <option value="st-ice">❄️ 11. Ice Frozen</option>
+                <option value="st-comic">💥 12. Comic Pop</option>
+                <option value="st-monoton">🌐 13. Retro Line</option>
+                <option value="st-bungee">🦓 14. Zebra Shade</option>
+                <option value="st-candy">🍭 15. Candy Sweet</option>
+                <option value="st-smooth">🍃 16. Smooth Wave</option>
+                <option value="st-luxury">✨ 17. Gradient Glow</option>
+                <option value="st-shadow">🏢 18. 3D Hard Shadow</option>
+                <option value="st-vintage">📜 19. Old Newspaper</option>
+                <option value="st-wood">🪵 20. Wooden Carve</option>
+            </select>
+            <button class="btn-download" onclick="downloadPNG()">📥 Save PNG</button>
+        </div>
+        
+        <div class="preview-area">
+            <div id="captureTarget" class="st-minecraft">Arafath</div>
+        </div>
+    </div>
+
+    <script>
+        // ടൈപ്പ് ചെയ്യുമ്പോഴും സ്റ്റൈൽ മാറുമ്പോഴും റൺ ആകുന്ന ഫങ്ക്ഷൻ
+        function updateStyle() {
+            let input = document.getElementById("inputText").value;
+            let target = document.getElementById("captureTarget");
+            let selectedStyle = document.getElementById("styleSelect").value;
+            
+            if (input.trim() === "") {
+                target.innerText = "Type Something...";
+                return;
+            }
+            
+            target.className = ""; 
+            target.classList.add(selectedStyle);
+            target.innerText = input;
+        }
+
+        document.getElementById("inputText").addEventListener("input", updateStyle);
+
+        // ടെക്സ്റ്റിനെ ബാക്ക്ഗ്രൗണ്ട് ഇല്ലാത്ത സുതാര്യമായ (Transparent) PNG ചിത്രം ആക്കി മാറ്റാൻ
+        function downloadPNG() {
+            let target = document.getElementById("captureTarget");
+            
+            // html2canvas ടൂൾ ഉപയോഗിച്ച് ഡിസൈൻ ക്യാപ്‌ചർ ചെയ്യുന്നു
+            html2canvas(target, {
+                backgroundColor: null, // ഇത് കൊണ്ടാണ് ബാക്ക്ഗ്രൗണ്ട് ഇല്ലാതെ (Transparent) ആയി കിട്ടുന്നത്
+                scale: 3 // ചിത്രത്തിന് നല്ല ക്വാളിറ്റി (High Resolution) കിട്ടാൻ
+            }).then(canvas => {
+                let image = canvas.toDataURL("image/png");
+                let link = document.createElement('a');
+                link.download = document.getElementById("inputText").value + '_style.png';
+                link.href = image;
+                link.click();
+            });
+        }
+        
+        // തുടക്കത്തിൽ തന്നെ ടെക്സ്റ്റ് ലോഡ് ചെയ്യാൻ
+        updateStyle();
+    </script>
+</body>
+</html>
+

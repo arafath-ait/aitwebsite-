@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arafath's Mega Station</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&family=Silkscreen&family=Chakra+Petch:wght@700&family=Rubik+Glitch&family=Creepster&family=Pixelify+Sans:wght@700&family=Orbitron:wght@600&family=Pacifico&display=swap" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+    <style>
+        /* 🌈 കളർഫുൾ ബാക്ക്ഗ്രൗണ്ട് */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(-45deg, #ff0055, #7a00ff, #00e5ff, #00ff66, #ffbe00);
+            background-size: 500% 500%;
+            animation: gradientBG 10s ease infinite;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* 🔒 രഹസ്യ AIT ഓപ്ഷൻ */
+        .secret-ait {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.4);
+            cursor: pointer;
+            user-select: none;
+            font-family: monospace;
+            z-index: 100;
+        }
+
+        .container {
+            background: rgba(0, 0, 0, 0.8);
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+            padding: 25px;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.8);
+            text-align: center;
+            margin: 20px auto;
+            border-radius: 15px;
+        }
+
+        /* 🎨 ഡ്രോപ്പ്ഡൗൺ ലിസ്റ്റ് */
+        .style-selector {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        .style-selector label {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 11px;
+            color: #00e5ff;
+            display: block;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+        }
+        .style-selector select {
+            width: 100%;
+            padding: 12px;
+            background: #111;
+            border: 2px solid #00e5ff;
+            color: #fff;
+            font-size: 16px;
+            outline: none;
+            cursor: pointer;
+            border-radius: 8px;
+        }
+
+        #capture-area {
+            padding: 10px;
+            background: transparent;
+        }
+
+        textarea {
+            width: 100%;
+            height: 160px;
+            box-sizing: border-box;
+            padding: 15px;
+            resize: none;
+            outline: none;
+            transition: all 0.3s ease;
+            border-radius: 10px;
+        }
+
+        /* 🌈 1. മഴവില്ല് (Rainbow Style) */
+        .style-rainbow {
+            background: #111;
+            border: 5px solid;
+            border-image: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet) 1;
+            color: #fff;
+            font-family: 'Pacifico', cursive;
+            font-size: 22px;
+            text-shadow: 0 0 10px #ff0055, 0 0 20px #00e5ff;
+        }
+
+        /* ⚡ 2. ഫ്യൂച്ചറിസ്റ്റിക് നിയോൺ */
+        .style-neon {
+            background: #050515;
+            border: 4px solid #00e5ff;
+            color: #00e5ff;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 20px;
+            box-shadow: 0 0 20px #00e5ff, inset 0 0 15px #00e5ff;
+            text-shadow: 0 0 8px #00e5ff;
+        }
+
+        /* 👾 3. ഗെയിമിങ് ആർക്കേഡ് */
+        .style-arcade {
+            background: #20002c;
+            border: 4px solid #ff007f;
+            color: #ff007f;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 14px;
+            text-shadow: 3px 3px 0px #000;
+        }
+
+        /* 🧱 4. മൈൻക്രാഫ്റ്റ് ഡേർട്ട് ബ്ലോക്ക് */
+        .style-mc-dirt {
+            background: #4d3319; border: 6px solid #866043;
+            color: #fff; font-family: 'Press Start 2P', cursive; font-size: 14px;
+            text-shadow: 3px 3px 0px #000; box-shadow: inset 4px 4px 0px #fff;
+        }
+
+        /* 💎 5. മൈൻക്രാഫ്റ്റ് ഡയമണ്ട് */
+        .style-diamond {
+            background: #113f48; border: 6px solid #55ffff;
+            color: #55ffff; font-family: 'Pixelify Sans', cursive; font-size: 24px;
+            text-shadow: 3px 3px 0px #000; box-shadow: 0 0 15px #55ffff;
+        }
+
+        /* 🔥 6. മൈൻക്രാഫ്റ്റ് റെഡ്സ്റ്റോൺ */
+        .style-redstone {
+            background: #1a0000; border: 6px solid #ff0000;
+            color: #ff3333; font-family: 'Press Start 2P', cursive; font-size: 13px;
+            box-shadow: inset 0 0 15px #ff0000;
+        }
+
+        /* 💚 7. മൈൻക്രാഫ്റ്റ് എമറാൾഡ് */
+        .style-emerald {
+            background: #002b0c; border: 6px solid #55ff55;
+            color: #55ff55; font-family: 'Chakra Petch', sans-serif; font-size: 22px;
+            text-shadow: 2px 2px 0px #000;
+        }
+
+        /* 🔮 8. നെതർ പോർട്ടൽ */
+        .style-nether {
+            background: #2b0000; border: 6px solid #ff2a6d;
+            color: #ff5555; font-family: 'Creepster', cursive; font-size: 28px;
+            text-shadow: 0 0 10px #ff0000;
+        }
+
+        /* 🖨️ 9. ക്ലാസിക് ടൈപ്പ്റൈറ്റർ */
+        .style-typewriter {
+            background: #f4e8c1; border: 4px solid #8a7341;
+            color: #222; font-family: 'VT323', monospace; font-size: 28px;
+        }
+
+        /* 🔘 ബട്ടണുകൾ */
+        .btn-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .btn {
+            background: #ff007f;
+            border: none;
+            color: #fff;
+            padding: 12px 24px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(255, 0, 127, 0.4);
+            transition: 0.2s;
+        }
+        .btn:active { transform: translateY(2px); }
+
+        /* 📻 മ്യൂസിക് ബോക്സ് */
+        .radio-box {
+            margin-top: 25px;
+            background: #111;
+            border: 2px solid #333;
+            padding: 15px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="secret-ait" onclick="checkVisitorCount()">AIT</div>
+
+    <div class="container">
+        
+        <div class="style-selector">
+            <label for="font-style">SELECT YOUR FAVOURITE STYLE:</label>
+            <select id="font-style" onchange="changeTextStyle()">
+                <option value="style-rainbow">🌈 1. Rainbow Glow (മഴവില്ല് സ്റ്റൈൽ)</option>
+                <option value="style-neon">⚡ 2. Futuristic Neon Light</option>
+                <option value="style-arcade">👾 3. Retro Arcade Gaming</option>
+                <option value="style-mc-dirt">🧱 4. Minecraft Dirt Block 3D</option>
+                <option value="style-diamond">💎 5. Minecraft Diamond Glow</option>
+                <option value="style-redstone">🔥 6. Minecraft Redstone Power</option>
+                <option value="style-emerald">💚 7. Minecraft Emerald Block</option>
+                <option value="style-nether">🔮 8. Nether Portal Horror</option>
+                <option value="style-typewriter">🖨️ 9. Classic Old Typewriter</option>
+            </select>
+        </div>
+
+        <div id="capture-area">
+            <textarea id="typing-area" class="style-rainbow" placeholder="ഇവിടെ ടൈപ്പ് ചെയ്യൂ..."></textarea>
+        </div>
+
+        <div class="btn-group">
+            <button class="btn" onclick="saveToGallery()">🖼️ SAVE TO GALLERY</button>
+            <button class="btn" onclick="saveTextFile()">💾 SAVE TEXT</button>
+        </div>
+
+        <div class="radio-box">
+            <div style="font-family: 'Orbitron'; font-size: 10px; margin-bottom: 8px; color: #00e5ff;">📻 AIT MUSIC STATION</div>
+            <audio id="bg-music" loop controls style="width: 100%;">
+                <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+            </audio>
+        </div>
+    </div>
+
+    <script>
+        // 📈 വിസിറ്റർ കൗണ്ട്
+        let count = localStorage.getItem('page_view');
+        if (count === null) { count = 1; } else { count = parseInt(count) + 1; }
+        localStorage.setItem('page_view', count);
+
+        // 🔒 രഹസ്യ AIT പാസ്സ്‌വേർഡ്
+        function checkVisitorCount() {
+            let password = prompt("ENTER SECRET CODE:");
+            if (password === "AIT 2012") {
+                alert("📊 ആകെ വിസിറ്റേഴ്സ്: " + count + " പേർ");
+            } else if (password !== null) {
+                alert("❌ ACCESS DENIED!");
+            }
+        }
+
+        // 🎨 സ്റ്റൈലുകൾ മാറ്റാൻ
+        function changeTextStyle() {
+            const selector = document.getElementById('font-style');
+            const textarea = document.getElementById('typing-area');
+            textarea.className = '';
+            textarea.classList.add(selector.value);
+        }
+
+        // 🖼️ ഗാലറിയിലേക്ക് സേവ് ചെയ്യാൻ
+        function saveToGallery() {
+            const area = document.getElementById('capture-area');
+            html2canvas(area).then(canvas => {
+                let link = document.createElement('a');
+                link.download = 'arafath_design.png';
+                link.href = canvas.toDataURL();
+                link.click();
+                alert("🖼️ ഫോട്ടോ നിന്റെ ഗാലറിയിലേക്ക് സേവ് ആയിട്ടുണ്ട്!");
+            });
+        }
+
+        // 💾 ടെക്സ്റ്റ് സേവ് ചെയ്യാൻ
+        function saveTextFile() {
+            const text = document.getElementById('typing-area').value;
+            if(!text) { alert("ആദ്യം എന്തെങ്കിലും ടൈപ്പ് ചെയ്യൂ!"); return; }
+            let blob = new Blob([text], { type: "text/plain;charset=utf-8" });
+            let link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = "my_notes.txt";
+            link.click();
+        }
+
+        // 📳 വൈബ്രേഷനും ബീപ്പും
+        const typingArea = document.getElementById('typing-area');
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        
+        typingArea.addEventListener('input', () => {
+            if (navigator.vibrate) { navigator.vibrate(12); }
+            let osc = audioCtx.createOscillator();
+            let gain = audioCtx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(300, audioCtx.currentTime); 
+            gain.gain.setValueAtTime(0.01, audioCtx.currentTime);
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start();
+            osc.stop(audioCtx.currentTime + 0.03);
+        });
+    </script>
+</body>
+</html>

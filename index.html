@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arafath's Minecraft 3D Station</title>
+    <!-- 8-Bit / Gaming ഫോണ്ടുകൾ ലോഡ് ചെയ്യുന്നു -->
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&family=Silkscreen&display=swap" rel="stylesheet">
+    
+    <style>
+        /* 🌈 കളർഫുൾ ബാക്ക്ഗ്രൗണ്ട് ആനിമേഷൻ */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(-45deg, #120c1f, #241442, #0b2545, #000000);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* 🔒 രഹസ്യ AIT ബട്ടൺ */
+        .secret-ait {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.25);
+            cursor: pointer;
+            user-select: none;
+            font-family: monospace;
+            z-index: 100;
+        }
+        .secret-ait:hover {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .container {
+            background: rgba(0, 0, 0, 0.6);
+            border: 4px solid #3c3c3c;
+            border-radius: 0px; /* മൈൻക്രാഫ്റ്റ് സ്റ്റൈൽ ബോക്സ് */
+            padding: 30px;
+            width: 90%;
+            max-width: 550px;
+            box-shadow: 0 20px 0 #1e1e1e, 0 30px 40px rgba(0,0,0,0.8);
+            text-align: center;
+            margin: 20px auto;
+        }
+
+        /* 🎨 3D സ്റ്റൈൽ സെലക്ടർ */
+        .style-selector {
+            margin-bottom: 25px;
+            text-align: left;
+        }
+        .style-selector label {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 10px;
+            color: #55ff55;
+            display: block;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 0px #000;
+        }
+        .style-selector select {
+            width: 100%;
+            padding: 12px;
+            background: #4a4a4a;
+            border: 3px solid #fff;
+            border-color: #fff #555 #555 #fff;
+            color: #fff;
+            font-family: 'VT323', monospace;
+            font-size: 20px;
+            outline: none;
+            cursor: pointer;
+            box-shadow: inset -2px -2px 0px #000;
+        }
+
+        /* ⌨️ 3D ടൈപ്പിംഗ് ഏരിയ - ഇതാണ് മെയിൻ മാറ്റം! */
+        textarea {
+            width: 100%;
+            height: 150px;
+            box-sizing: border-box;
+            padding: 15px;
+            resize: none;
+            outline: none;
+            transition: all 0.2s ease;
+        }
+
+        /* 🔥 പലതരം മൈൻക്രാഫ്റ്റ് 3D ഓപ്ഷനുകൾ (CSS 3D Effects) */
+        
+        /* 1. Classic 3D Dirt/Stone Block */
+        .style-mc-3d {
+            background: #4d3319;
+            border: 6px solid #866043;
+            border-color: #866043 #2b1d0e #2b1d0e #866043;
+            color: #fff;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 16px;
+            text-shadow: 3px 3px 0px #000;
+            box-shadow: inset 4px 4px 0px #fff, inset -4px -4px 0px #000;
+        }
+
+        /* 2. Nether Glow 3D */
+        .style-nether {
+            background: #1c0d12;
+            border: 6px solid #ff2a6d;
+            color: #ff0055;
+            font-family: 'VT323', monospace;
+            font-size: 28px;
+            text-shadow: 0 0 10px #ff2a6d, 3px 3px 0px #000;
+            box-shadow: inset 0 0 20px #ff2a6d, 5px 5px 0px #000;
+        }
+
+        /* 3. Diamond Block 3D */
+        .style-diamond {
+            background: #2c5d63;
+            border: 6px solid #63c6d1;
+            border-color: #a3f7ff #1d4045 #1d4045 #a3f7ff;
+            color: #a3f7ff;
+            font-family: 'Silkscreen', sans-serif;
+            font-size: 18px;
+            text-shadow: 2px 2px 0px #1d4045;
+            box-shadow: inset 0 0 15px rgba(99,198,209,0.5), 0 10px 0px #132b2e;
+        }
+
+        /* 4. Redstone Power 3D */
+        .style-redstone {
+            background: #2b0505;
+            border: 6px solid #ff2200;
+            color: #ff3737;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 14px;
+            text-shadow: 2px 2px 0px #550000;
+            box-shadow: inset 4px 4px 0px #ff8888;
+            animation: redstonePulse 1s infinite alternate;
+        }
+        @keyframes redstonePulse {
+            0% { border-color: #aa0000; box-shadow: inset 0 0 5px #ff0000; }
+            100% { border-color: #ff3300; box-shadow: inset 0 0 20px #ff0000; }
+        }
+
+        /* 5. Obsidian Shadow Block */
+        .style-obsidian {
+            background: #100720;
+            border: 6px solid #3c1053;
+            border-color: #5c2c77 #0a0214 #0a0214 #5c2c77;
+            color: #dcb3ff;
+            font-family: 'VT323', monospace;
+            font-size: 32px;
+            text-shadow: 4px 4px 0px #000;
+            box-shadow: inset -4px -4px 0px #3c1053;
+        }
+
+        /* 🧔 താടി മാറ്റുന്ന ടൂൾ ഏരിയ */
+        .beard-tool {
+            margin-top: 30px;
+            border-top: 4px solid #3c3c3c;
+            padding-top: 20px;
+        }
+
+        .btn {
+            background: #55ff55;
+            border: 4px solid #fff;
+            border-color: #fff #00aa00 #00aa00 #fff;
+            color: #000;
+            padding: 12px 25px;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 6px 0 #00aa00, 0 10px 10px rgba(0,0,0,0.5);
+        }
+        .btn:active {
+            transform: translateY(4px);
+            box-shadow: 0 2px 0 #00aa00;
+        }
+
+        /* 📻 റെട്രോ റേഡിയോ */
+        .radio-box {
+            margin-top: 30px;
+            background: #866043;
+            border: 4px solid #4d3319;
+            padding: 15px;
+            box-shadow: inset 0 0 10px #000;
+        }
+        .radio-title {
+            font-family: 'Press Start 2P', cursive;
+            color: #fff;
+            font-size: 10px;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 0px #000;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 🔒 രഹസ്യ AIT ഓപ്ഷൻ -->
+    <div class="secret-ait" onclick="checkVisitorCount()">AIT</div>
+
+    <div class="container">
+        
+        <!-- 🎨 മൈൻക്രാഫ്റ്റ് 3D ഓപ്ഷനുകൾ തിരഞ്ഞെടുക്കാനുള്ള ലിസ്റ്റ് -->
+        <div class="style-selector">
+            <label for="font-style">SELECT MINECRAFT 3D BLOCK:</label>
+            <select id="font-style" onchange="changeTextStyle()">
+                <option value="style-mc-3d">Minecraft Classic 3D Block</option>
+                <option value="style-nether">Nether Glow 3D</option>
+                <option value="style-diamond">Diamond Block 3D</option>
+                <option value="style-redstone">Redstone Power (Animated)</option>
+                <option value="style-obsidian">Obsidian Shadow Block</option>
+            </select>
+        </div>
+
+        <!-- ⌨️ 3D ടൈപ്പിംഗ് സെക്ഷൻ -->
+        <textarea id="typing-area" class="style-mc-3d" placeholder="ഇവിടെ ടൈപ്പ് ചെയ്യൂ..."></textarea>
+
+        <!-- 🧔 താടി മാറ്റുന്ന ഫിൽട്ടർ -->
+        <div class="beard-tool">
+            <button class="btn" onclick="triggerBeardAction()">🧔 REMOVE BEARD</button>
+        </div>
+
+        <!-- 📻 റെട്രോ റേഡിയോ യുണിറ്റ് -->
+        <div class="radio-box">
+            <div class="radio-title">📻 MC JUKEBOX UNIT</div>
+            <audio id="bg-music" loop controls style="width: 100%;">
+                <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+            </audio>
+        </div>
+    </div>
+
+    <script>
+        // 📈 വിസിറ്റർ കൗണ്ട്
+        let count = localStorage.getItem('page_view');
+        if (count === null) { count = 1; } else { count = parseInt(count) + 1; }
+        localStorage.setItem('page_view', count);
+
+        // 🔒 രഹസ്യ പാസ്സ്‌വേർഡ്
+        function checkVisitorCount() {
+            let password = prompt("ENTER SECRET CODE:");
+            if (password === "AIT 2012") {
+                alert("📊 TOTAL VISITORS: " + count);
+            } else if (password !== null) {
+                alert("❌ ACCESS DENIED!");
+            }
+        }
+
+        // 🎨 3D സ്റ്റൈൽ മാറ്റാനുള്ള ലോജിക്
+        function changeTextStyle() {
+            const selector = document.getElementById('font-style');
+            const textarea = document.getElementById('typing-area');
+            textarea.className = '';
+            textarea.classList.add(selector.value);
+        }
+
+        // 📳 വൈബ്രേഷനും ബീപ്പും
+        const typingArea = document.getElementById('typing-area');
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        
+        typingArea.addEventListener('input', () => {
+            if (navigator.vibrate) { navigator.vibrate(15); }
+            
+            let osc = audioCtx.createOscillator();
+            let gain = audioCtx.createGain();
+            osc.type = 'square'; // മൈൻക്രാഫ്റ്റിന് ചേരുന്ന റെട്രോ ശബ്ദം
+            osc.frequency.setValueAtTime(150, audioCtx.currentTime); 
+            gain.gain.setValueAtTime(0.01, audioCtx.currentTime);
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start();
+            osc.stop(audioCtx.currentTime + 0.04);
+        });
+
+        function triggerBeardAction() {
+            if (navigator.vibrate) { navigator.vibrate([60, 60, 60]); }
+            alert("🧔 BEARD REMOVER ACTIVATED!");
+        }
+    </script>
+</body>
+</html>

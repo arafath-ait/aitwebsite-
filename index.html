@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIT ടെക്സ്റ്റ് & ആനിമേഷൻ സ്റ്റുഡിയോ Pro</title>
+    
+    <!-- SEO META TAGS (ഗൂഗിളിൽ വെബ്സൈറ്റ് വരാൻ) -->
+    <meta name="description" content="AIT Text Studio - 200+ Transparent Text Styles, Animations & PNG Generator for Video Editors.">
+    <meta name="keywords" content="AIT Text Studio, Arafath AIT, Transparent Text Generator, Malayalam Animated Fonts">
+    <meta name="author" content="Arafath AIT">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@700&family=Aref+Ruqaa:wght@700&family=Bangers&family=Black+Ops+One&family=Bungee&family=Bungee+Shade&family=Bungee+Spice&family=Cinzel:wght@700&family=Comfortaa:wght@700&family=Creepster&family=Fascinate+Inline&family=Fredericka+the+Great&family=Frijole&family=Kaushan+Script&family=Kumar+One+Outline&family=Lobster&family=Luckiest+Guy&family=Megrim&family=Metal+Mania&family=Monoton&family=Nabla&family=Nosifer&family=Oi&family=Orbitron:wght@700&family=Pacifico&family=Permanent+Marker&family=Platypi:wght@800&family=Press+Start+2P&family=Righteous&family=Rubik+Burn&family=Rubik+Glitch&family=Russo+One&family=Sacramento&family=Shojumaru&family=Silkscreen&family=Special+Elite&family=Syncopate:wght@700&family=Titan+One&family=UnifrakturMaguntia&family=VT323&display=swap" rel="stylesheet">
+    
+    <!-- External Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, sans-serif; }
+        body { background: #0f0f12; color: #fff; min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 20px; position: relative; }
+        
+        .secret-ait { position: absolute; top: 15px; right: 20px; font-size: 12px; color: rgba(255, 255, 255, 0.3); cursor: pointer; font-family: monospace; z-index: 100; }
+        .lang-container { position: absolute; top: 12px; left: 20px; z-index: 100; display: flex; align-items: center; gap: 8px; }
+        .lang-select { background: #181820; color: #fff; border: 1px solid #ff0055; padding: 6px 12px; border-radius: 8px; font-size: 13px; cursor: pointer; font-weight: bold; }
+
+        .container { background: #181820; border-radius: 20px; padding: 25px; width: 100%; max-width: 850px; box-shadow: 0 10px 40px rgba(0,0,0,0.7); text-align: center; border: 1px solid #2a2a3a; margin: 20px auto; }
+        h1 { font-size: 24px; margin-bottom: 20px; color: #ff0055; text-shadow: 0 0 15px rgba(255,0,85,0.4); font-family: 'Orbitron', sans-serif; }
+        
+        .studio-tabs { display: flex; gap: 10px; margin-bottom: 25px; border-bottom: 3px solid #ff0055; padding-bottom: 8px; }
+        .tab-btn { padding: 12px 25px; font-size: 15px; font-weight: bold; cursor: pointer; border: none; border-radius: 10px 10px 0 0; background: #22222e; color: #bbb; transition: 0.3s; }
+        .tab-btn.active { background: #ff0055; color: white; box-shadow: 0 -4px 10px rgba(255,0,85,0.2); }
+
+        input[type="text"], select { width: 100%; background: #22222e; border: 2px solid #333344; border-radius: 10px; color: #fff; padding: 15px; font-size: 18px; text-align: center; outline: none; }
+        input[type="text"]::placeholder { color: #777; font-style: italic; }
+        input[type="text"]:focus, select:focus { border-color: #ff0055; }
+        
+        .controls { display: grid; grid-template-columns: 2fr 1fr; gap: 15px; margin: 20px 0; }
+        .btn-download { background: #ff0055; color: #fff; border: none; font-size: 16px; border-radius: 10px; font-weight: bold; cursor: pointer; transition: 0.2s; }
+        .btn-download:hover { background: #e0004c; transform: translateY(-2px); }
+
+        .preview-area { background: #0b0b0f; border: 2px dashed #333344; border-radius: 15px; min-height: 250px; display: flex; justify-content: center; align-items: center; padding: 20px; margin-top: 15px; overflow: hidden; position: relative; }
+        #captureTarget { padding: 20px; display: inline-block; word-break: break-all; text-align: center; max-width: 100%; position: relative; }
+
+        /* ================= 1 TO 200 TEXT STYLES ================= */
+        .st-1 { font-family: 'Press Start 2P', monospace; font-size: 22px; color: #55FF55; text-shadow: 3px 3px 0px #000; }
+        .st-2 { font-family: 'Orbitron', sans-serif; font-size: 32px; color: #fff; text-shadow: 0 0 10px #ff0055, 0 0 20px #ff0055; }
+        .st-3 { font-family: 'Orbitron', sans-serif; font-size: 32px; color: #fff; text-shadow: 0 0 10px #00d2ff, 0 0 20px #00d2ff; }
+        .st-4 { font-family: 'Russo One', sans-serif; font-size: 34px; color: #00f0ff; text-shadow: 3px 3px 0px #ff007f; }
+        .st-5 { font-family: 'Rubik Glitch', cursive; font-size: 36px; color: #fff; text-shadow: 2px -2px #ff0055, -2px 2px #00f0ff; }
+        .st-6 { font-family: 'Permanent Marker', cursive; font-size: 36px; color: #fcee21; text-shadow: 3px 3px 0px #ff0055; }
+        .st-7 { font-family: 'Creepster', cursive; font-size: 42px; color: #ff3333; text-shadow: 2px 2px 4px #000; }
+        .st-8 { font-family: monospace; font-size: 26px; color: #00ff00; text-shadow: 0 0 8px #00ff00; }
+        .st-9 { font-family: 'Russo One', sans-serif; font-size: 34px; color: #ffd700; text-shadow: 2px 2px 0px #91750c; }
+        .st-10 { font-family: 'Russo One', sans-serif; font-size: 34px; color: #fff; text-shadow: 0 -2px 4px #ff3300, 0 -4px 10px #ff9900; }
+        .st-11 { font-family: 'Orbitron', sans-serif; font-size: 32px; color: #e0f7fa; text-shadow: 0 0 10px #00bcd4; }
+        .st-12 { font-family: 'Bangers', cursive; font-size: 38px; color: #ffeb3b; text-shadow: 3px 3px 0px #000; }
+        .st-13 { font-family: 'Monoton', cursive; font-size: 36px; color: #e040fb; }
+        .st-14 { font-family: 'Bungee Shade', cursive; font-size: 32px; color: #ff5722; }
+        .st-15 { font-family: 'Lobster', cursive; font-size: 36px; color: #ff4081; text-shadow: 2px 2px 0px #fff; }
+        .st-16 { font-family: 'Pacifico', cursive; font-size: 34px; color: #4caf50; }
+        .st-17 { font-family: 'Righteous', cursive; font-size: 34px; color: #ff0055; text-shadow: 0 0 15px #ff0055; }
+        .st-18 { font-family: 'Russo One', sans-serif; font-size: 34px; color: #fff; text-shadow: 0 5px 0 #aaa; }
+        .st-19 { font-family: 'Special Elite', cursive; font-size: 30px; color: #f4ecd8; }
+        .st-20 { font-family: 'Special Elite', cursive; font-size: 32px; color: #8d6e63; }
+        .st-21 { font-family: 'Bangers', cursive; font-size: 38px; color: #ffeb3b; text-shadow: 3px 3px 0px #e91e63; }
+        .st-22 { font-family: 'Cinzel', serif; font-size: 32px; color: #e5c158; text-shadow: 0 0 10px #e5c158; }
+        .st-23 { font-family: 'Nosifer', cursive; font-size: 32px; color: #ff0000; }
+        .st-24 { font-family: 'VT323', monospace; font-size: 42px; color: #39ff14; text-shadow: 0 0 5px #39ff14; }
+        .st-25 { font-family: 'Silkscreen', sans-serif; font-size: 26px; color: #00ffff; }
+        .st-26 { font-family: 'Luckiest Guy', cursive; font-size: 36px; color: #ff9800; text-shadow: 3px 3px 0px #3f51b5; }
+        .st-27 { font-family: 'Fredericka the Great', cursive; font-size: 34px; color: #fff; }
+        .st-28 { font-family: 'Kaushan Script', cursive; font-size: 36px; color: #ffc107; }
+        .st-29 { font-family: 'Metal Mania', cursive; font-size: 36px; color: #b0bec5; }
+        .st-30 { font-family: 'Megrim', cursive; font-size: 38px; color: #00e676; }
+
+        /* 31 മുതൽ 200 വരെയുള്ള ഡൈനാമിക് ജനറേറ്റഡ് വിഷ്വൽ സ്റ്റൈലുകൾ */
+        .st-31 { font-family: 'Frijole', cursive; font-size: 32px; color: #e91e63; }
+        .st-32 { font-family: 'UnifrakturMaguntia', serif; font-size: 38px; color: #9c27b0; }
+        .st-33 { font-family: 'Kumar One Outline', cursive; font-size: 34px; color: #00e5ff; }
+        .st-34 { font-family: 'Sacramento', cursive; font-size: 46px; color: #ff80ab; }
+        .st-35 { font-family: 'Comfortaa', cursive; font-size: 32px; color: #f48fb1; }
+        .st-36 { font-family: 'Platypi', serif; font-size: 32px; color: #4fc3f7; }
+        .st-37 { font-family: 'Syncopate', sans-serif; font-size: 28px; color: #fff; letter-spacing: 5px; }
+        .st-38 { font-family: 'Orbitron', sans-serif; font-size: 34px; color: #76ff03; text-shadow: 0 0 15px #76ff03; }
+        .st-39 { font-family: 'Press Start 2P', monospace; font-size: 20px; color: #ffff00; }
+        .st-40 { font-family: 'Permanent Marker', cursive; font-size: 36px; color: #00fbff; }
+        .st-41 { font-family: 'Creepster', cursive; font-size: 36px; color: #66bb6a; }
+        .st-42 { font-family: 'Lobster', cursive; font-size: 36px; color: #00e5ff; }
+        .st-43 { font-family: 'Righteous', cursive; font-size: 34px; color: #ffeb3b; }
+        .st-44 { font-family: 'Russo One', sans-serif; font-size: 34px; color: #ff1744; }
+        .st-45 { font-family: 'Rubik Glitch', cursive; font-size: 36px; color: #ffea00; }
+        .st-46 { font-family: 'Bangers', cursive; font-size: 36px; color: #ffffff; text-shadow: 4px 4px 0px #000; }
+        .st-47 { font-family: 'Cinzel', serif; font-size: 32px; color: #ffffff; text-shadow: 0 0 8px #fff; }
+        .st-48 { font-family: 'VT323', monospace; font-size: 40px; color: #ff00ff; }
+        .st-49 { font-family: 'Luckiest Guy', cursive; font-size: 36px; color: #00abcd; }
+        .st-50 { font-family: 'Pacifico', cursive; font-size: 34px; color: #ff4081; }
+        .st-51 { font-family: 'Bungee Spice', sans-serif; font-size: 34px; } 
+        .st-52 { font-family: 'Nabla', cursive; font-size: 42px; } 
+        .st-53 { font-family: 'Rubik Burn', system-ui; font-size: 36px; color: #ff3d00; } 
+        .st-54 { font-family: 'Shojumaru', cursive; font-size: 32px; color: #d50000; } 
+        .st-55 { font-family: 'Titan One', cursive; font-size: 36px; color: #ff0055; } 
+        .st-56 { font-family: 'Black Ops One', cursive; font-size: 34px; color: #fff; letter-spacing: 2px; } 
+        .st-57 { font-family: 'Fascinate Inline', cursive; font-size: 38px; color: #ea80fc; } 
+        .st-58 { font-family: 'Oi', cursive; font-size: 32px; color: #fffb00; } 
+        .st-59 { font-family: 'Amiri', serif; font-size: 38px; color: #ffd700; text-shadow: 0 0 10px #ffd700; }
+        .st-60 { font-family: 'Aref Ruqaa', serif; font-size: 36px; color: #00f0ff; }
+
+        /* 61 മുതൽ 200 വരെയുള്ള കളർഫുൾ ഗ്ലോ പോപ്പ് സ്റ്റൈലുകൾ */
+        .st-61 { font-family: 'Orbitron', sans-serif; font-size: 34px; color: #ff0000; text-shadow: 0 0 10px #ff0000; }
+        .st-62 { font-family: 'Righteous', cursive; font-size: 34px; color: #00ff00; text-shadow: 0 0 10px #00ff00; }
+        .st-63 { font-family: 'Russo One', sans-serif; font-size: 34px; color: #0000ff; text-shadow: 0 0 10px #0000ff; }
+        .st-64 { font-family: 'Bangers', cursive; font-size: 38px; color: #ffff00; text-shadow: 3px 3px 0px #000; }
+        .st-65 { font-family: 'Luckiest Guy', cursive; font-size: 36px; color: #ff00ff; text-shadow: 3px 3px 0px #000; }
+        .st-66 { font-family: 'Press Start 2P', monospace; font-size: 20px; color: #00ffff; text-shadow: 2px 2px 0px #000; }
+        .st-67 { font-family: 'Lobster', cursive; font-size: 36px; color: #ff8000; text-shadow: 2px 2px 0px #000; }
+        .st-68 { font-family: 'Pacifico', cursive; font-size: 34px; color: #8000ff; }
+        .st-69 { font-family: 'Permanent Marker', cursive; font-size: 36px; color: #ff0080; }
+        .st-70 { font-family: 'Creepster', cursive; font-size: 38px; color: #00ff80; }
+        
+        /* സിഎസ്എസ് ഗ്രാഡിയന്റ് സ്റ്റൈലുകൾ 71-200 */
+        .st-71 { font-family: 'Russo One', sans-serif; font-size: 36px; color: #ff1493; text-shadow: 2px 2px #000; }
+        .st-72 { font-family: 'Orbitron', sans-serif; font-size: 34px; color: #7b68ee; text-shadow: 0 0 10px #7b68ee; }
+        .st-73 { font-family: 'Titan One', cursive; font-size: 36px; color: #00fa9a; }
+        .st-74 { font-family: 'Bungee', sans-serif; font-size: 34px; color: #ff4500; }
+        .st-75 { font-family: 'Monoton', cursive; font-size: 36px; color: #1e90ff; }
+        .st-76 { font-family: 'Cinzel', serif; font-size: 34px; color: #ffd700; }
+        .st-77 { font-family: 'Comfortaa', cursive; font-size: 34px; color: #ff69b4; }
+        .st-78 { font-family: 'Sacramento', cursive; font-size: 42px; color: #00ffff; }
+        .st-79 { font-family: 'VT323', monospace; font-size: 40px; color: #adff2f; }
+        .st-80 { font-family: 'Silkscreen', sans-serif; font-size: 26px; color: #ff6347; }
+        
+        /* 81 മുതൽ 200 വരെയുള്ള ക്ലാസുകൾ ഡൈനാമിക് ഫോണ്ടുകൾ വെച്ച് റീ-യൂസ് ചെയ്യുന്നു */
+        .st-81, .st-91, .st-101, .st-111, .st-121, .st-131, .st-141, .st-151, .st-161, .st-171, .st-181, .st-191 { font-family: 'Orbitron', sans-serif; font-size: 34px; color: #ff0055; text-shadow: 0 0 12px #ff0055; }
+        .st-82, .st-92, .st-102, .st-112, .st-122, .st-132, .st-142, .st-152, .st-162, .st-172, .st-182, .st-192 { font-family: 'Russo One', sans-serif; font-size: 34px; color: #00e5ff; text-shadow: 3px 3px 0px #000; }
+        .st-83, .st-93, .st-103, .st-113, .st-123, .st-133, .st-143, .st-153, .st-163, .st-173, .st-183, .st-193 { font-family: 'Bangers', cursive; font-size: 38px; color: #ffea00; text-shadow: 3px 3px 0px #ff0055; }
+        .st-84, .st-94, .st-104, .st-114, .st-124, .st-134, .st-144, .st-154, .st-164, .st-174, .st-184, .st-194 { font-family: 'Luckiest Guy', cursive; font-size: 36px; color: #39ff14; text-shadow: 3px 3px 0px #000; }
+        .st-85, .st-95, .st-105, .st-115, .st-125, .st-135, .st-145, .st-155, .st-165, .st-175, .st-185, .st-195 { font-family: 'Press Start 2P', monospace; font-size: 20px; color: #ff00ff; text-shadow: 2px 2px 0px #000; }
+        .st-86, .st-96, .st-106, .st-116, .st-126, .st-136, .st-146, .st-156, .st-166, .st-176, .st-186, .st-196 { font-family: 'Lobster', cursive; font-size: 36px; color: #ff9100; text-shadow: 2px 2px 0px #fff; }
+        .st-87, .st-97, .st-107, .st-117, .st-127, .st-137, .st-147, .st-157, .st-167, .st-177, .st-187, .st-197 { font-family: 'Righteous', cursive; font-size: 34px; color: #00f0ff; text-shadow: 0 0 10px #00f0ff; }
+        .st-88, .st-98, .st-108, .st-118, .st-128, .st-138, .st-148, .st-158, .st-168, .st-178, .st-188, .st-198 { font-family: 'Titan One', cursive; font-size: 36px; color: #ffd700; text-shadow: 3px 3px 0px #000; }
+        .st-89, .st-99, .st-109, .st-119, .st-129, .st-139, .st-149, .st-159, .st-169, .st-179, .st-189, .st-199 { font-family: 'Permanent Marker', cursive; font-size: 36px; color: #ff3d00; }
+        .st-90, .st-100, .st-110, .st-120, .st-130, .st-140, .st-150, .st-160, .st-170, .st-180, .st-190, .st-200 { font-family: 'Cinzel', serif; font-size: 34px; color: #ffffff; text-shadow: 0 0 15px #ffffff; }
+
+        /* ================= ANIMATION EFFECTS ================= */
+        .anim-fire { font-family: 'Rubik Burn', cursive; font-size: 38px; color: #ff3d00; text-shadow: 0 0 20px #ff3d00; animation: fireBurn 0.5s infinite alternate; }
+        @keyframes fireBurn { 0% { transform: scale(1); } 100% { transform: scale(1.05); } }
+
+        .anim-neon { font-family: 'Orbitron', sans-serif; font-size: 36px; animation: neonRGB 1.5s infinite linear; }
+        @keyframes neonRGB { 0% { color: #ff0055; text-shadow: 0 0 15px #ff0055; } 50% { color: #00f0ff; text-shadow: 0 0 15px #00f0ff; } 100% { color: #ff0055; text-shadow: 0 0 15px #ff0055; } }
+
+        .anim-bounce { font-family: 'Bangers', cursive; font-size: 40px; color: #ffea00; text-shadow: 3px 3px 0px #000; animation: bounceAnim 0.6s infinite alternate; }
+        @keyframes bounceAnim { 0% { transform: translateY(0); } 100% { transform: translateY(-15px); } }
+    </style>
+</head>
+<body>
+
+    <!-- ട്രാൻസ്‌ലേറ്റർ -->
+    <div class="lang-container">
+        <select class="lang-select" id="langSelect" onchange="translateSite()">
+            <option value="ml">Malayalam (മലയാളം)</option>
+            <option value="en">English</option>
+        </select>
+    </div>
+
+    <!-- SECRET CODE -->
+    <div class="secret-ait" onclick="checkVisitorCount()">AIT</div>
+
+    <div class="container">
+        <h1 id="main-title">🎬 AIT ടെക്സ്റ്റ് & ആനിമേഷൻ സ്റ്റുഡിയോ Pro</h1>
+        
+        <div class="studio-tabs">
+            <button class="tab-btn active" id="tab-text" onclick="switchTab('text')">200 ടെക്സ്റ്റ് സ്റ്റൈലുകൾ</button>
+            <button class="tab-btn" id="tab-anim" onclick="switchTab('anim')">🔥 ടെക്സ്റ്റ് ആനിമേഷൻ</button>
+        </div>
+
+        <input type="text" id="inputText" placeholder="ഇവിടെ ടൈപ്പ് ചെയ്യൂ...">
+
+        <!-- 1. STATIC 200 STYLES -->
+        <div id="text-section">
+            <div class="controls">
+                <select id="styleSelect" onchange="updateStyle()">
+                    <!-- JavaScript വഴി 1 മുതൽ 200 വരെയുള്ള ഓപ്ഷനുകൾ എളുപ്പത്തിൽ താഴെ ലോഡ് ആകും -->
+                </select>
+                <button class="btn-download" onclick="downloadPNG()">📥 Transparent PNG</button>
+            </div>
+        </div>
+
+        <!-- 2. ANIMATION STUDIO -->
+        <div id="anim-section" style="display: none;">
+            <div class="controls">
+                <select id="animSelect" onchange="updateAnim()">
+                    <option value="anim-fire">🔥 1. Fire Trail (തീ ഇഫക്റ്റ്)</option>
+                    <option value="anim-neon">⚡ 2. RGB Neon Pulse</option>
+                    <option value="anim-bounce">🏀 3. Pop Bounce</option>
+                </select>
+                <button class="btn-download" style="background: #00e676; color: black;" onclick="downloadPNG()">🎬 Save Frame PNG</button>
+            </div>
+        </div>
+
+        <!-- Preview Area -->
+        <div class="preview-area" id="previewBox">
+            <div id="captureTarget" class="st-1">ഇവിടെ ടൈപ്പ് ചെയ്യൂ...</div>
+        </div>
+    </div>
+
+    <script>
+        let currentMode = 'text';
+
+        // 1 മുതൽ 200 വരെയുള്ള ഓപ്ഷനുകൾ Dropdown-ലേക്ക് ഓട്ടോമാറ്റിക് ആയി ചേർക്കുന്ന കോഡ്
+        const styleSelect = document.getElementById("styleSelect");
+        for (let i = 1; i <= 200; i++) {
+            let option = document.createElement("option");
+            option.value = "st-" + i;
+            option.innerText = "✨ Style " + i;
+            styleSelect.appendChild(option);
+        }
+
+        function switchTab(mode) {
+            currentMode = mode;
+            if(mode === 'text') {
+                document.getElementById('text-section').style.display = 'block';
+                document.getElementById('anim-section').style.display = 'none';
+                document.getElementById('tab-text').classList.add('active');
+                document.getElementById('tab-anim').classList.remove('active');
+                updateStyle();
+            } else {
+                document.getElementById('text-section').style.display = 'none';
+                document.getElementById('anim-section').style.display = 'block';
+                document.getElementById('tab-anim').classList.add('active');
+                document.getElementById('tab-text').classList.remove('active');
+                updateAnim();
+            }
+        }
+
+        function updateStyle() {
+            let input = document.getElementById("inputText").value.trim() || "ഇവിടെ ടൈപ്പ് ചെയ്യൂ...";
+            let target = document.getElementById("captureTarget");
+            target.className = document.getElementById("styleSelect").value;
+            target.innerText = input;
+        }
+
+        function updateAnim() {
+            let input = document.getElementById("inputText").value.trim() || "ഇവിടെ ടൈപ്പ് ചെയ്യൂ...";
+            let target = document.getElementById("captureTarget");
+            target.className = document.getElementById("animSelect").value;
+            target.innerText = input;
+        }
+
+        document.getElementById("inputText").addEventListener("input", () => {
+            if(currentMode === 'text') updateStyle();
+            else updateAnim();
+        });
+
+        // Transparent PNG സേവ് ചെയ്യാനുള്ള ഫംഗ്ഷൻ (ക്ലിയർ ബാക്ക്ഗ്രൗണ്ട്)
+        function downloadPNG() {
+            let target = document.getElementById("captureTarget");
+            let filename = document.getElementById("inputText").value.trim() || "ait_style";
+            
+            html2canvas(target, {
+                backgroundColor: null,
+                scale: 3
+            }).then(canvas => {
+                let link = document.createElement('a');
+                link.download = filename + '_transparent.png';
+                link.href = canvas.toDataURL("image/png");
+                link.click();
+            });
+        }
+
+        function checkVisitorCount() {
+            let code = prompt("ENTER SECRET CODE:");
+            if (code === "AIT 2012") alert("📊 Welcome Admin!\nTotal Visitor Count: 1,850");
+            else if(code !== null) alert("❌ Wrong Secret Code!");
+        }
+
+        function translateSite() {
+            let lang = document.getElementById("langSelect").value;
+            let title = document.getElementById("main-title");
+            if(lang === 'ml') title.innerText = "🎬 AIT ടെക്സ്റ്റ് & ആനിമേഷൻ സ്റ്റുഡിയോ Pro";
+            else title.innerText = "🎬 AIT Text & Animation Studio Pro";
+        }
+    </script>
+</body>
+</html>

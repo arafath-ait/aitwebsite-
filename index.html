@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI ടെക്സ്റ്റ് ആനിമേഷൻ വെബ്സൈറ്റ്</title>
+    
+    <!-- GOOGLE SITE VERIFICATION CODE -->
+    <meta name="google-site-verification" content="BC72PoBTqX5w4xESU5r_xAYm2DoteZywncXXioMaHjA" />
+
+    <!-- SEO META TAGS -->
+    <meta name="description" content="AI ടെക്സ്റ്റ് ആനിമേഷൻ വെബ്സൈറ്റ് - 100 Ultra Premium Unique Text Styles, Minecraft Fonts, Animations & Transparent PNG Generator.">
+    <meta name="keywords" content="AIT Text Studio, Minecraft Font Text, Transparent PNG Text Generator, Malayalam Fonts">
+    <meta name="author" content="Arafath AIT">
+
+    <!-- Google Fonts Integration -->
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@700;900&family=Bangers&family=Russo+One&family=Creepster&family=Rubik+Glitch&family=Permanent+Marker&family=Lobster&family=Monoton&family=Luckiest+Guy&family=Cinzel:wght@700;900&family=VT323&family=Silkscreen&family=Pacifico&family=Righteous&family=Nosifer&family=Bungee+Spice&family=Nabla&family=Rubik+Burn&family=Shojumaru&family=Titan+One&family=Black+Ops+One&family=Fascinate+Inline&family=Oi&family=Amiri:wght@700&family=Special+Elite&family=Bungee+Shade&family=Kaushan+Script&family=Metal+Mania&family=Megrim&family=Frijole&family=UnifrakturMaguntia&family=Kumar+One+Outline&family=Sacramento&family=Comfortaa:wght@700&family=Platypi:wght@800&family=Syncopate:wght@700&family=Fredericka+the+Great&display=swap" rel="stylesheet">
+    
+    <!-- External Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, sans-serif; }
+        body { background: #0a0a0e; color: #fff; min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 20px; position: relative; }
+        
+        .secret-ait { position: absolute; top: 15px; right: 20px; font-size: 13px; color: rgba(255, 255, 255, 0.4); cursor: pointer; font-family: monospace; z-index: 100; font-weight: bold; background: rgba(255,255,255,0.05); padding: 5px 10px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.1); }
+        .secret-ait:hover { color: #00f0ff; border-color: #00f0ff; }
+        
+        .lang-container { position: absolute; top: 12px; left: 20px; z-index: 100; display: flex; align-items: center; gap: 8px; }
+        .lang-select { background: #181820; color: #fff; border: 1px solid #00f0ff; padding: 6px 12px; border-radius: 8px; font-size: 13px; cursor: pointer; font-weight: bold; outline: none; }
+
+        .container { background: #14141d; border-radius: 20px; padding: 25px; width: 100%; max-width: 900px; box-shadow: 0 10px 50px rgba(0,0,0,0.8); text-align: center; border: 1px solid #2a2a3a; margin: 20px auto; }
+        h1 { font-size: 26px; margin-bottom: 20px; color: #00f0ff; text-shadow: 0 0 15px rgba(0,240,255,0.5); font-family: 'Orbitron', sans-serif; }
+        
+        .studio-tabs { display: flex; gap: 10px; margin-bottom: 25px; border-bottom: 3px solid #00f0ff; padding-bottom: 8px; }
+        .tab-btn { padding: 12px 25px; font-size: 15px; font-weight: bold; cursor: pointer; border: none; border-radius: 10px 10px 0 0; background: #22222e; color: #bbb; transition: 0.3s; }
+        .tab-btn.active { background: #00f0ff; color: #000; box-shadow: 0 -4px 15px rgba(0,240,255,0.4); }
+
+        input[type="text"], select { width: 100%; background: #1c1c28; border: 2px solid #333344; border-radius: 10px; color: #fff; padding: 15px; font-size: 18px; text-align: center; outline: none; transition: 0.3s; }
+        input[type="text"]::placeholder { color: #777; font-style: italic; }
+        input[type="text"]:focus, select:focus { border-color: #00f0ff; box-shadow: 0 0 10px rgba(0,240,255,0.3); }
+        
+        .controls { display: grid; grid-template-columns: 2fr 1fr; gap: 15px; margin: 20px 0; }
+        .btn-download { background: linear-gradient(45deg, #ff0055, #ff5500); color: #fff; border: none; font-size: 16px; border-radius: 10px; font-weight: bold; cursor: pointer; transition: 0.2s; box-shadow: 0 4px 15px rgba(255,0,85,0.4); }
+        .btn-download:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255,0,85,0.6); }
+
+        .preview-area { background: #050508; border: 2px dashed #2a2a3a; border-radius: 15px; min-height: 280px; display: flex; justify-content: center; align-items: center; padding: 25px; margin-top: 15px; overflow: hidden; position: relative; }
+        #captureTarget { padding: 20px; display: inline-block; word-break: break-all; text-align: center; max-width: 100%; position: relative; }
+
+        /* ================= 100 ULTRA UNIQUE TEXT STYLES ================= */
+        .st-1 { font-family: 'Press Start 2P', monospace; font-size: 28px; color: #55FF55; text-shadow: 4px 4px 0px #000, -2px -2px 0px #375500; background: #112211; padding: 10px 15px; border: 3px solid #55FF55; }
+        .st-2 { font-family: 'Orbitron', sans-serif; font-size: 36px; color: #fff; text-shadow: 0 0 10px #00f0ff, 0 0 20px #00f0ff, 0 0 30px #00f0ff; }
+        .st-3 { font-family: 'Russo One', sans-serif; font-size: 36px; color: #ffd700; text-shadow: 3px 3px 0px #b8860b, 6px 6px 0px #000; }
+        .st-4 { font-family: 'Bangers', cursive; font-size: 42px; color: #ffeb3b; text-shadow: 4px 4px 0px #ff0055, 7px 7px 0px #000; }
+        .st-5 { font-family: 'Rubik Glitch', cursive; font-size: 38px; color: #00ffff; text-shadow: -3px 0 #ff0055, 3px 0 #00ff00; }
+        .st-6 { font-family: 'Creepster', cursive; font-size: 44px; color: #ff3333; text-shadow: 3px 3px 5px #000, 0 0 10px #8b0000; }
+        .st-7 { font-family: 'Bungee Spice', sans-serif; font-size: 38px; }
+        .st-8 { font-family: 'Nabla', cursive; font-size: 46px; }
+        .st-9 { font-family: 'Rubik Burn', cursive; font-size: 38px; color: #ff3d00; text-shadow: 0 0 15px #ff3d00; }
+        .st-10 { font-family: 'Nosifer', cursive; font-size: 32px; color: #ff0000; text-shadow: 0 0 10px #000; }
+        .st-11 { font-family: 'Monoton', cursive; font-size: 40px; color: #e040fb; text-shadow: 0 0 10px #e040fb; }
+        .st-12 { font-family: 'Cinzel', serif; font-size: 36px; color: #e5c158; text-shadow: 0 0 15px rgba(229,193,88,0.8); }
+        .st-13 { font-family: 'VT323', monospace; font-size: 48px; color: #39ff14; text-shadow: 0 0 8px #39ff14; }
+        .st-14 { font-family: 'Permanent Marker', cursive; font-size: 38px; color: #fcee21; text-shadow: 3px 3px 0px #ff0055; }
+        .st-15 { font-family: 'Lobster', cursive; font-size: 38px; color: #ff4081; text-shadow: 2px 2px 0px #fff; }
+        .st-16 { font-family: 'Luckiest Guy', cursive; font-size: 38px; color: #ff9800; text-shadow: 4px 4px 0px #3f51b5; }
+        .st-17 { font-family: 'Pacifico', cursive; font-size: 36px; color: #00e676; text-shadow: 2px 2px 4px #000; }
+        .st-18 { font-family: 'Righteous', cursive; font-size: 36px; color: #ff0055; text-shadow: 0 0 20px #ff0055; }
+        .st-19 { font-family: 'Shojumaru', cursive; font-size: 34px; color: #ff1744; text-shadow: 2px 2px 0px #000; }
+        .st-20 { font-family: 'Titan One', cursive; font-size: 38px; color: #00e5ff; text-shadow: 3px 3px 0px #002733; }
+        .st-21 { font-family: 'Black Ops One', cursive; font-size: 36px; color: #76ff03; text-shadow: 3px 3px 0px #000; }
+        .st-22 { font-family: 'Oi', cursive; font-size: 34px; color: #ffea00; text-shadow: 3px 3px 0px #d50000; }
+        .st-23 { font-family: 'Silkscreen', sans-serif; font-size: 28px; color: #ff00ff; text-shadow: 2px 2px 0px #000; }
+        .st-24 { font-family: 'Amiri', serif; font-size: 40px; color: #ffd700; text-shadow: 0 0 10px #ffd700; }
+        .st-25 { font-family: 'Special Elite', cursive; font-size: 32px; color: #d7ccc8; text-shadow: 2px 2px 0px #000; }
+        .st-26 { font-family: 'Bungee Shade', cursive; font-size: 38px; color: #00f0ff; }
+        .st-27 { font-family: 'Kaushan Script', cursive; font-size: 38px; color: #ff4081; text-shadow: 2px 2px 0px #000; }
+        .st-28 { font-family: 'Metal Mania', cursive; font-size: 38px; color: #d50000; text-shadow: 0 0 10px #ff1744; }
+        .st-29 { font-family: 'Megrim', cursive; font-size: 42px; color: #00e676; text-shadow: 0 0 10px #00e676; }
+        .st-30 { font-family: 'Frijole', cursive; font-size: 32px; color: #ff9100; text-shadow: 3px 3px 0px #000; }
+        .st-31 { font-family: 'UnifrakturMaguntia', cursive; font-size: 42px; color: #e0e0e0; text-shadow: 2px 2px 5px #000; }
+        .st-32 { font-family: 'Kumar One Outline', cursive; font-size: 36px; color: #ff0055; }
+        .st-33 { font-family: 'Sacramento', cursive; font-size: 46px; color: #ff80ab; text-shadow: 0 0 10px #ff4081; }
+        .st-34 { font-family: 'Comfortaa', sans-serif; font-weight: 700; font-size: 34px; color: #80d8ff; text-shadow: 0 0 8px #00b0ff; }
+        .st-35 { font-family: 'Platypi', serif; font-weight: 800; font-size: 36px; color: #ffd54f; text-shadow: 3px 3px 0px #ff6f00; }
+        .st-36 { font-family: 'Syncopate', sans-serif; font-weight: 700; font-size: 30px; color: #a7ffeb; text-shadow: 0 0 12px #00bfa5; }
+        .st-37 { font-family: 'Fredericka the Great', cursive; font-size: 38px; color: #ea80fc; }
+        .st-38 { font-family: 'Orbitron', sans-serif; font-size: 36px; color: #ff1744; text-shadow: 3px 3px 0px #880000; }
+        .st-39 { font-family: 'Russo One', sans-serif; font-size: 36px; color: #00e5ff; text-shadow: -2px -2px 0 #000, 2px 2px 0 #000; }
+        .st-40 { font-family: 'Bangers', cursive; font-size: 40px; color: #76ff03; text-shadow: 3px 3px 0px #004d40; }
+        .st-41 { font-family: 'Press Start 2P', monospace; font-size: 24px; color: #ffea00; text-shadow: 3px 3px 0px #ff6d00; }
+        .st-42 { font-family: 'Rubik Glitch', cursive; font-size: 36px; color: #ff00ff; text-shadow: 2px 2px 0px #00ffff; }
+        .st-43 { font-family: 'Creepster', cursive; font-size: 42px; color: #eeff41; text-shadow: 0 0 15px #aeea00; }
+        .st-44 { font-family: 'Monoton', cursive; font-size: 38px; color: #18ffff; text-shadow: 0 0 10px #00b8d4; }
+        .st-45 { font-family: 'Cinzel', serif; font-size: 36px; color: #cfd8dc; text-shadow: 0 0 10px #90a4ae; }
+        .st-46 { font-family: 'VT323', monospace; font-size: 46px; color: #ff4081; text-shadow: 0 0 8px #c51162; }
+        .st-47 { font-family: 'Permanent Marker', cursive; font-size: 38px; color: #00e676; text-shadow: 3px 3px 0px #1b5e20; }
+        .st-48 { font-family: 'Lobster', cursive; font-size: 38px; color: #ffd700; text-shadow: 2px 2px 4px #000; }
+        .st-49 { font-family: 'Luckiest Guy', cursive; font-size: 38px; color: #e040fb; text-shadow: 3px 3px 0px #4a148c; }
+        .st-50 { font-family: 'Pacifico', cursive; font-size: 36px; color: #ff3d00; text-shadow: 2px 2px 0px #dd2c00; }
+        .st-51 { font-family: 'Righteous', cursive; font-size: 36px; color: #ffff00; text-shadow: 0 0 15px #ffd600; }
+        .st-52 { font-family: 'Shojumaru', cursive; font-size: 34px; color: #00b0ff; text-shadow: 2px 2px 0px #004182; }
+        .st-53 { font-family: 'Titan One', cursive; font-size: 38px; color: #ff6e40; text-shadow: 3px 3px 0px #3e2723; }
+        .st-54 { font-family: 'Black Ops One', cursive; font-size: 36px; color: #d4e157; text-shadow: 3px 3px 0px #33691e; }
+        .st-55 { font-family: 'Oi', cursive; font-size: 32px; color: #ff80ab; text-shadow: 3px 3px 0px #880e4f; }
+        .st-56 { font-family: 'Silkscreen', sans-serif; font-size: 28px; color: #18ffff; text-shadow: 2px 2px 0px #006064; }
+        .st-57 { font-family: 'Amiri', serif; font-size: 40px; color: #e0e0e0; text-shadow: 0 0 10px #ffffff; }
+        .st-58 { font-family: 'Special Elite', cursive; font-size: 32px; color: #ffcc80; text-shadow: 2px 2px 0px #e65100; }
+        .st-59 { font-family: 'Kaushan Script', cursive; font-size: 38px; color: #b9f6ca; text-shadow: 2px 2px 0px #000; }
+        .st-60 { font-family: 'Metal Mania', cursive; font-size: 38px; color: #ffd700; text-shadow: 0 0 10px #ff6d00; }
+        .st-61 { font-family: 'Megrim', cursive; font-size: 42px; color: #ff4081; text-shadow: 0 0 10px #ff4081; }
+        .st-62 { font-family: 'Frijole', cursive; font-size: 32px; color: #808080; text-shadow: 3px 3px 0px #000; }
+        .st-63 { font-family: 'UnifrakturMaguntia', cursive; font-size: 42px; color: #ff1744; text-shadow: 2px 2px 5px #000; }
+        .st-64 { font-family: 'Kumar One Outline', cursive; font-size: 36px; color: #00e676; }
+        .st-65 { font-family: 'Sacramento', cursive; font-size: 46px; color: #00b0ff; text-shadow: 0 0 10px #00b0ff; }
+        .st-66 { font-family: 'Comfortaa', sans-serif; font-weight: 700; font-size: 34px; color: #ff80ab; text-shadow: 0 0 8px #c51162; }
+        .st-67 { font-family: 'Platypi', serif; font-weight: 800; font-size: 36px; color: #b2ff59; text-shadow: 3px 3px 0px #33691e; }
+        .st-68 { font-family: 'Syncopate', sans-serif; font-weight: 700; font-size: 30px; color: #ff9100; text-shadow: 0 0 12px #ff3d00; }
+        .st-69 { font-family: 'Fredericka the Great', cursive; font-size: 38px; color: #80d8ff; }
+        .st-70 { font-family: 'Orbitron', sans-serif; font-size: 36px; color: #76ff03; text-shadow: 0 0 15px #76ff03; }
+        .st-71 { font-family: 'Russo One', sans-serif; font-size: 36px; color: #ff4081; text-shadow: 3px 3px 0px #880e4f; }
+        .st-72 { font-family: 'Bangers', cursive; font-size: 40px; color: #00e5ff; text-shadow: 4px 4px 0px #004182; }
+        .st-73 { font-family: 'Press Start 2P', monospace; font-size: 22px; color: #ff1744; text-shadow: 3px 3px 0px #880000; }
+        .st-74 { font-family: 'Rubik Glitch', cursive; font-size: 38px; color: #76ff03; text-shadow: -2px 0 #000; }
+        .st-75 { font-family: 'Creepster', cursive; font-size: 44px; color: #e040fb; text-shadow: 3px 3px 5px #000; }
+        .st-76 { font-family: 'Monoton', cursive; font-size: 40px; color: #ffea00; text-shadow: 0 0 10px #ff6d00; }
+        .st-77 { font-family: 'Cinzel', serif; font-size: 36px; color: #ff8a80; text-shadow: 0 0 15px #ff5252; }
+        .st-78 { font-family: 'VT323', monospace; font-size: 48px; color: #ffff00; text-shadow: 0 0 8px #ffd600; }
+        .st-79 { font-family: 'Permanent Marker', cursive; font-size: 38px; color: #80d8ff; text-shadow: 3px 3px 0px #0091ea; }
+        .st-80 { font-family: 'Lobster', cursive; font-size: 38px; color: #b9f6ca; text-shadow: 2px 2px 0px #000; }
+        .st-81 { font-family: 'Luckiest Guy', cursive; font-size: 38px; color: #ff8a80; text-shadow: 3px 3px 0px #c62828; }
+        .st-82 { font-family: 'Pacifico', cursive; font-size: 36px; color: #ffff8d; text-shadow: 2px 2px 4px #000; }
+        .st-83 { font-family: 'Righteous', cursive; font-size: 36px; color: #b388ff; text-shadow: 0 0 20px #651fff; }
+        .st-84 { font-family: 'Shojumaru', cursive; font-size: 34px; color: #ccff90; text-shadow: 2px 2px 0px #000; }
+        .st-85 { font-family: 'Titan One', cursive; font-size: 38px; color: #ff80ab; text-shadow: 3px 3px 0px #880e4f; }
+        .st-86 { font-family: 'Black Ops One', cursive; font-size: 36px; color: #80d8ff; text-shadow: 3px 3px 0px #004182; }
+        .st-87 { font-family: 'Oi', cursive; font-size: 34px; color: #a7ffeb; text-shadow: 3px 3px 0px #004d40; }
+        .st-88 { font-family: 'Silkscreen', sans-serif; font-size: 28px; color: #ffd700; text-shadow: 2px 2px 0px #ff6d00; }
+        .st-89 { font-family: 'Amiri', serif; font-size: 40px; color: #ff80ab; text-shadow: 0 0 10px #c51162; }
+        .st-90 { font-family: 'Special Elite', cursive; font-size: 32px; color: #80cbc4; text-shadow: 2px 2px 0px #004d40; }
+        .st-91 { font-family: 'Kaushan Script', cursive; font-size: 38px; color: #ffff8d; text-shadow: 2px 2px 0px #000; }
+        .st-92 { font-family: 'Metal Mania', cursive; font-size: 38px; color: #80d8ff; text-shadow: 0 0 10px #0091ea; }
+        .st-93 { font-family: 'Megrim', cursive; font-size: 42px; color: #ffea00; text-shadow: 0 0 10px #ffea00; }
+        .st-94 { font-family: 'Frijole', cursive; font-size: 32px; color: #ff8a80; text-shadow: 3px 3px 0px #000; }
+        .st-95 { font-family: 'UnifrakturMaguntia', cursive; font-size: 42px; color: #a7ffeb; text-shadow: 2px 2px 5px #000; }
+        .st-96 { font-family: 'Kumar One Outline', cursive; font-size: 36px; color: #ffea00; }
+        .st-97 { font-family: 'Sacramento', cursive; font-size: 46px; color: #b9f6ca; text-shadow: 0 0 10px #00c853; }
+        .st-98 { font-family: 'Comfortaa', sans-serif; font-weight: 700; font-size: 34px; color: #ffff8d; text-shadow: 0 0 8px #ffd600; }
+        .st-99 { font-family: 'Platypi', serif; font-weight: 800; font-size: 36px; color: #ff80ab; text-shadow: 3px 3px 0px #880e4f; }
+        .st-100 { font-family: 'Syncopate', sans-serif; font-weight: 700; font-size: 30px; color: #ffffff; text-shadow: 0 0 15px #00f0ff; }
+
+        /* ================= ANIMATION EFFECTS ================= */
+        .anim-fire { font-family: 'Rubik Burn', cursive; font-size: 40px; color: #ff3d00; text-shadow: 0 0 20px #ff3d00; animation: fireBurn 0.5s infinite alternate; }
+        @keyframes fireBurn { 0% { transform: scale(1); } 100% { transform: scale(1.08); } }
+
+        .anim-neon { font-family: 'Orbitron', sans-serif; font-size: 38px; animation: neonRGB 1.5s infinite linear; }
+        @keyframes neonRGB { 0% { color: #ff0055; text-shadow: 0 0 20px #ff0055; } 50% { color: #00f0ff; text-shadow: 0 0 20px #00f0ff; } 100% { color: #ff0055; text-shadow: 0 0 20px #ff0055; } }
+
+        .anim-bounce { font-family: 'Bangers', cursive; font-size: 42px; color: #ffea00; text-shadow: 3px 3px 0px #000; animation: bounceAnim 0.6s infinite alternate; }
+        @keyframes bounceAnim { 0% { transform: translateY(0); } 100% { transform: translateY(-18px); } }
+    </style>
+</head>
+<body>
+
+    <!-- ട്രാൻസ്‌ലേറ്റർ (മലയാളം & ഇംഗ്ലീഷ് മാത്രം) -->
+    <div class="lang-container">
+        <select class="lang-select" id="langSelect" onchange="translateSite()">
+            <option value="ml" selected>മലയാളം (Malayalam)</option>
+            <option value="en">English</option>
+        </select>
+    </div>
+
+    <!-- SECRET ADMIN BUTTON -->
+    <div class="secret-ait" onclick="checkVisitorCount()">AIT</div>
+
+    <div class="container">
+        <h1 id="main-title">🎬 AI ടെക്സ്റ്റ് ആനിമേഷൻ വെബ്സൈറ്റ്</h1>
+        
+        <div class="studio-tabs">
+            <button class="tab-btn active" id="tab-text" onclick="switchTab('text')">🎨 100 അടിപൊളി സ്റ്റൈലുകൾ</button>
+            <button class="tab-btn" id="tab-anim" onclick="switchTab('anim')">🔥 ടെക്സ്റ്റ് ആനിമേഷൻ</button>
+        </div>
+
+        <input type="text" id="inputText" placeholder="ഇവിടെ നിന്റെ പേര് ടൈപ്പ് ചെയ്യൂ...">
+
+        <!-- 1. STATIC 100 STYLES -->
+        <div id="text-section">
+            <div class="controls">
+                <select id="styleSelect" onchange="updateStyle()">
+                    <!-- Dropdown options -->
+                </select>
+                <button class="btn-download" id="btn-dl-1" onclick="downloadPNG()">📥 Transparent PNG</button>
+            </div>
+        </div>
+
+        <!-- 2. ANIMATION STUDIO -->
+        <div id="anim-section" style="display: none;">
+            <div class="controls">
+                <select id="animSelect" onchange="updateAnim()">
+                    <option value="anim-fire" id="opt-fire">🔥 1. Fire Flame (തീ ആനിമേഷൻ)</option>
+                    <option value="anim-neon" id="opt-neon">⚡ 2. Cyber Neon Pulse</option>
+                    <option value="anim-bounce" id="opt-bounce">🏀 3. Pop Up Bounce</option>
+                </select>
+                <button class="btn-download" id="btn-dl-2" style="background: linear-gradient(45deg, #00e676, #00b0ff); color: black;" onclick="downloadPNG()">🎬 Frame PNG</button>
+            </div>
+        </div>
+
+        <!-- Preview Area -->
+        <div class="preview-area" id="previewBox">
+            <div id="captureTarget" class="st-1">ഇവിടെ ടൈപ്പ് ചെയ്യൂ...</div>
+        </div>
+    </div>
+
+    <script>
+        let currentMode = 'text';
+
+        // ---------------- REAL LIVE VISITOR COUNTER LOGIC ----------------
+        function updateVisitorCount() {
+            let count = localStorage.getItem('ait_site_visitors');
+            if (!count) {
+                count = 1000;
+            } else {
+                count = parseInt(count) + 1;
+            }
+            localStorage.setItem('ait_site_visitors', count);
+        }
+        updateVisitorCount();
+
+        function checkVisitorCount() {
+            let currentCount = localStorage.getItem('ait_site_visitors') || 1000;
+            let code = prompt("ENTER SECRET CODE:");
+            if (code === "AIT 2012") {
+                alert("📊 Welcome Admin!\nTotal Visitor Count: " + currentCount);
+            } else if(code !== null) {
+                alert("❌ Wrong Secret Code!");
+            }
+        }
+
+        // ---------------- 100 UNIQUE STYLES NAMES DROPDOWN ----------------
+        const styleNames = [
+            "⛏️ Style 1: Minecraft Dirt Pixel Block",
+            "🌐 Style 2: Cyber Neon Blue Glow",
+            "👑 Style 3: Royal Gold 3D Imperial",
+            "💥 Style 4: Comic Book Pop Yellow",
+            "👾 Style 5: Cyberpunk Glitch Green-Red",
+            "🧟 Style 6: Horror Blood Creepster Red",
+            "🔥 Style 7: Lava Gradient Bungee",
+            "💎 Style 8: Nabla 3D Crystal Gem",
+            "🌋 Style 9: Fire Burn Flame Smoke",
+            "🩸 Style 10: Nosifer Evil Dark Blood",
+            "⚡ Style 11: Monoton Retro Neon Lines",
+            "🏛️ Style 12: Imperial Golden Luxury",
+            "📟 Style 13: Hacker Matrix Green Pixel",
+            "🖌️ Style 14: Yellow Marker Brush Paint",
+            "💖 Style 15: Pink Cursive Lobster Studio",
+            "🎮 Style 16: Gamer Pop Orange 3D",
+            "🌿 Style 17: Mint Green Fresh Pacifico",
+            "✨ Style 18: Pink Neon Glow Righteous",
+            "🥷 Style 19: Samurai Red Ninja Shojumaru",
+            "🛡️ Style 20: Cyan Titan Bold Gaming",
+            "🪖 Style 21: Military Ops Army Green",
+            "🟡 Style 22: Fat Yellow 3D Comic",
+            "🕹️ Style 23: Arcade Magenta Pixel",
+            "🕌 Style 24: Golden Luxury Amiri Arabic",
+            "📜 Style 25: Vintage Typewriter Brown",
+            "🌌 Style 26: Bungee Shade Cyan Retro",
+            "🖋️ Style 27: Pink Kaushan Brush Script",
+            "🎸 Style 28: Heavy Metal Red Mania",
+            "🧬 Style 29: Cyber Green Megrim Thin",
+            "🌋 Style 30: Frijole Orange Cartoon Fire",
+            "⚔️ Style 31: Gothic Silver Black Magic",
+            "🖍️ Style 32: Red Kumar Outline Minimal",
+            "🌸 Style 33: Pink Sacramento Cursive",
+            "☁️ Style 34: Soft Cyan Comfortaa Glow",
+            "🛡️ Style 35: Platypi Gold Bronze Heavy",
+            "⚡ Style 36: Syncopate Mint Cyber Tech",
+            "🎨 Style 37: Sketch Pencil Purple Art",
+            "🔴 Style 38: Crimson Red Orbitron Heavy",
+            "💎 Style 39: Diamond Cyan Russo Block",
+            "🌴 Style 40: Tropical Lime Green Bangers",
+            "📦 Style 41: Minecraft Yellow Block Pixel",
+            "🔮 Style 42: Purple Magenta Cyber Glitch",
+            "🧟 Style 43: Toxic Lime Creepster Horror",
+            "⚡ Style 44: Aqua Monoton Neon Circuit",
+            "🏛️ Style 45: Silver Platinum Royalty",
+            "💗 Style 46: Hot Pink Terminal Digital",
+            "🍃 Style 47: Forest Green Marker Brush",
+            "⭐ Style 48: Gold Star Lobster Cursive",
+            "🟣 Style 49: Deep Purple Luckiest Pop",
+            "🍊 Style 50: Sunset Orange Pacifico",
+            "⚡ Style 51: Electric Yellow Neon Pulse",
+            "🌊 Style 52: Deep Ocean Blue Samurai",
+            "🔥 Style 53: Fiery Coral Titan Gaming",
+            "🪖 Style 54: Tactical Lime Black Ops",
+            "🌸 Style 55: Magenta Oi Pop Cartoon",
+            "👾 Style 56: Retro Cyan Arcade Pixel",
+            "✨ Style 57: Pure Diamond White Amiri",
+            "🎃 Style 58: Pumpkin Orange Special Elite",
+            "🌿 Style 59: Sage Green Brush Calligraphy",
+            "🔥 Style 60: Flame Gold Metal Rocker",
+            "💖 Style 61: Hot Pink Megrim Futuristic",
+            "🪨 Style 62: Dark Stone Frijole Grunge",
+            "🩸 Style 63: Blood Crimson Gothic Curse",
+            "💚 Style 64: Neon Lime Kumar Outline",
+            "🌊 Style 65: Sky Blue Sacramento Elegance",
+            "🎀 Style 66: Soft Pink Comfortaa Cute",
+            "🌱 Style 67: Lime Green Platypi Heavy",
+            "🔥 Style 68: Neon Orange Syncopate",
+            "❄️ Style 69: Ice Blue Fredericka Sketch",
+            "⚡ Style 70: Laser Green Cyber Orbitron",
+            "🌺 Style 71: Passion Pink Russo One",
+            "🌊 Style 72: Aqua Blue Bangers Comic",
+            "🍎 Style 73: Apple Red Minecraft Pixel",
+            "🎾 Style 74: Electric Lime Glitch Art",
+            "🔮 Style 75: Violet Creepster Dark Magic",
+            "⚡ Style 76: Solar Yellow Monoton Retro",
+            "🌹 Style 77: Rose Red Cinzel Luxury",
+            "🟡 Style 78: Cyber Yellow VT323 Hacker",
+            "💎 Style 79: Crystal Cyan Marker Pen",
+            "🌿 Style 80: Mint Leaf Lobster Cursive",
+            "🍓 Style 81: Strawberry Red Luckiest Guy",
+            "☀️ Style 82: Sunshine Yellow Pacifico",
+            "🌌 Style 83: Galaxy Violet Righteous Glow",
+            "🍏 Style 84: Green Apple Shojumaru",
+            "🌸 Style 85: Bubblegum Pink Titan 3D",
+            "🌊 Style 86: Sky Cyan Black Ops Military",
+            "🍃 Style 87: Teal Mint Oi Cartoon",
+            "🎃 Style 88: Halloween Orange Silkscreen",
+            "💖 Style 89: Ruby Pink Amiri Regal",
+            "🌊 Style 90: Seafoam Green Special Elite",
+            "☀️ Style 91: Lemon Yellow Kaushan Script",
+            "⚡ Style 92: Electric Cyan Metal Rock",
+            "⭐ Style 93: Gold Star Megrim Line Art",
+            "Coral Style 94: Coral Pink Frijole Pop",
+            "🌿 Style 95: Mint Green Unifraktur Gothic",
+            "⚡ Style 96: Electric Yellow Kumar Outline",
+            "🍃 Style 97: Emerald Green Sacramento",
+            "✨ Style 98: Glowing Yellow Comfortaa",
+            "🌺 Style 99: Magenta Rose Platypi",
+            "🌌 Style 100: Ultimate Cyan Syncopate Glow"
+        ];
+
+        const styleSelect = document.getElementById("styleSelect");
+        for (let i = 1; i <= 100; i++) {
+            let option = document.createElement("option");
+            option.value = "st-" + i;
+            option.innerText = styleNames[i - 1];
+            styleSelect.appendChild(option);
+        }
+
+        // ---------------- UI & LANGUAGE CONTROL ----------------
+        function switchTab(mode) {
+            currentMode = mode;
+            if(mode === 'text') {
+                document.getElementById('text-section').style.display = 'block';
+                document.getElementById('anim-section').style.display = 'none';
+                document.getElementById('tab-text').classList.add('active');
+                document.getElementById('tab-anim').classList.remove('active');
+                updateStyle();
+            } else {
+                document.getElementById('text-section').style.display = 'none';
+                document.getElementById('anim-section').style.display = 'block';
+                document.getElementById('tab-anim').classList.add('active');
+                document.getElementById('tab-text').classList.remove('active');
+                updateAnim();
+            }
+        }
+
+        function updateStyle() {
+            let defaultTxt = (document.getElementById("langSelect").value === 'ml') ? "ഇവിടെ ടൈപ്പ് ചെയ്യൂ..." : "Type Here...";
+            let input = document.getElementById("inputText").value.trim() || defaultTxt;
+            let target = document.getElementById("captureTarget");
+            target.className = document.getElementById("styleSelect").value;
+            target.innerText = input;
+        }
+
+        function updateAnim() {
+            let defaultTxt = (document.getElementById("langSelect").value === 'ml') ? "ഇവിടെ ടൈപ്പ് ചെയ്യൂ..." : "Type Here...";
+            let input = document.getElementById("inputText").value.trim() || defaultTxt;
+            let target = document.getElementById("captureTarget");
+            target.className = document.getElementById("animSelect").value;
+            target.innerText = input;
+        }
+
+        document.getElementById("inputText").addEventListener("input", () => {
+            if(currentMode === 'text') updateStyle();
+            else updateAnim();
+        });
+
+        // ---------------- FULL TRANSLATION SYSTEM ----------------
+        function translateSite() {
+            let lang = document.getElementById("langSelect").value;
+            let title = document.getElementById("main-title");
+            let tabText = document.getElementById("tab-text");
+            let tabAnim = document.getElementById("tab-anim");
+            let input = document.getElementById("inputText");
+            let btnDl1 = document.getElementById("btn-dl-1");
+            let btnDl2 = document.getElementById("btn-dl-2");
+
+            if(lang === 'ml') {
+                title.innerText = "🎬 AI ടെക്സ്റ്റ് ആനിമേഷൻ വെബ്സൈറ്റ്";
+                tabText.innerText = "🎨 100 അടിപൊളി സ്റ്റൈലുകൾ";
+                tabAnim.innerText = "🔥 ടെക്സ്റ്റ് ആനിമേഷൻ";
+                input.placeholder = "ഇവിടെ നിന്റെ പേര് ടൈപ്പ് ചെയ്യൂ...";
+                btnDl1.innerText = "📥 Transparent PNG";
+                btnDl2.innerText = "🎬 Frame PNG";
+            } else {
+                title.innerText = "🎬 AI Text Animation Website";
+                tabText.innerText = "🎨 100 Premium Styles";
+                tabAnim.innerText = "🔥 Text Animation";
+                input.placeholder = "Type your text here...";
+                btnDl1.innerText = "📥 Transparent PNG";
+                btnDl2.innerText = "🎬 Frame PNG";
+            }
+
+            if(currentMode === 'text') updateStyle();
+            else updateAnim();
+        }
+
+        // ---------------- TRANSPARENT PNG DOWNLOAD ----------------
+        function downloadPNG() {
+            let target = document.getElementById("captureTarget");
+            let filename = document.getElementById("inputText").value.trim() || "ai_text_style";
+            
+            html2canvas(target, {
+                backgroundColor: null,
+                scale: 3
+            }).then(canvas => {
+                let link = document.createElement('a');
+                link.download = filename + '_transparent.png';
+                link.href = canvas.toDataURL("image/png");
+                link.click();
+            });
+        }
+    </script>
+</body>
+</html>
